@@ -1,31 +1,31 @@
 /* This program implements a stack in terms of a linked list. */
 # include <stdio.h>
 # include <stdlib.h>
+# include "libft/libft.h"
 
-struct intStack
+typedef struct s_stack
 {
-    int element;
-    struct intStack *next;
-};
+    char element;
+    struct s_stack *next;
+}               t_stack;
 
-typedef struct intStack node;
-node *begin=NULL;
-node *top = NULL;
+t_stack *begin = NULL;
+t_stack *top = NULL;
 
-node* getnode()
+t_stack *getnode()
 {
-    node *temporary;
+   t_stack *temporary;
 
-    temporary=(node *) malloc( sizeof(node)) ;
+    temporary=(t_stack *) malloc( sizeof(t_stack)) ;
     printf("\nEnter Element (0 <= N <= 30000): ");
     scanf("%d", &temporary -> element);
     temporary -> next = NULL;
     return (temporary);
 }
 
-void pushItem(node *newnode)
+void push(t_stack *newnode)
 {
-    node *temporary;
+   t_stack *temporary;
 
     if(newnode == NULL)
     {
@@ -50,7 +50,7 @@ void pushItem(node *newnode)
 
 void popItem()
 {
-  node *temporary;
+ t_stack *temporary;
   
     if (top == NULL)
     {
@@ -78,7 +78,7 @@ void popItem()
 
 void displayStack()
 {
-  node *temporary;
+ t_stack *temporary;
 
   if (top == NULL)
     printf("\nStack is Exhausted ");
@@ -111,11 +111,14 @@ int stackMenu()
   return intChoice;
 }
 
-void main()
+void main(int argv, char **argc)
 {
-  int intChoice;
-  node *newnode;
-  
+  int     intChoice;
+  t_stack *newnode;
+  char **p;
+
+  /* check the data*/
+  p = ft_strsplit(argc[1], ' ');
   do
   {
     intChoice = stackMenu();
@@ -123,7 +126,7 @@ void main()
     {
       case 1:
         newnode = getnode();
-        pushItem(newnode);
+        push(newnode);
         break;
       case 2:
         popItem();
