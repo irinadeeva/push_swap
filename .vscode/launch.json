@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/a.out",
-            "args": [],
+            "args": ["-2a147 2"],
             "preLaunchTask": "echo",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -19,3 +19,4 @@
         }
     ]
    }
+   

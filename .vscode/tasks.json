@@ -9,7 +9,8 @@
             "command": "gcc",
             "args": [
                 "-g",
-                "push_swap.c"
+                "push_swap.c",
+                "libft/libft.a"
             ],
             "group": {
                 "kind": "build",

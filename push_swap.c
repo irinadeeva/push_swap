@@ -5,47 +5,58 @@
 
 typedef struct s_stack
 {
-    char element;
+    int            element;
     struct s_stack *next;
 }               t_stack;
 
 t_stack *begin = NULL;
 t_stack *top = NULL;
 
-t_stack *getnode()
+
+void displayStack()
+{
+  t_stack *temporary;
+
+  //if (top == NULL)
+  //  printf("\nStack is Exhausted ");
+  //else
+ // {
+      temporary = begin;
+   // printf("\nElements in the stack : ");
+   // printf("\nLeft-Most Element Represents Bottom  :  ");
+   // printf("Right-Most Element Represents Top \n\n");
+    printf("%d", temporary -> element);
+    while(temporary != top)
+    {
+      temporary = temporary -> next;
+      printf("\t%d ", temporary -> element);
+    }
+ // }
+ }
+
+
+void push(t_stack *a)
 {
    t_stack *temporary;
 
-    temporary=(t_stack *) malloc( sizeof(t_stack)) ;
-    printf("\nEnter Element (0 <= N <= 30000): ");
-    scanf("%d", &temporary -> element);
-    temporary -> next = NULL;
-    return (temporary);
-}
-
-void push(t_stack *newnode)
-{
-   t_stack *temporary;
-
-    if(newnode == NULL)
+    if (a == NULL)
     {
         printf("\nThe Stack is Completely Fillled");
         return;
     }
     if (begin == NULL)
     {
-        begin = newnode;
-        top = newnode;
+        begin = a;
+        top = a;
     }
     else 
     {
-    temporary = begin;
-    while( temporary -> next != NULL)
-        temporary = temporary -> next;
-    temporary -> next = newnode;
-    top = newnode;
+      temporary = begin;
+      while (temporary -> next != NULL)
+          temporary = temporary -> next;
+      temporary -> next = a;
+      top = a;
     }
-    printf("\nElement is pushed into the Stack");
 }
 
 void popItem()
@@ -76,69 +87,51 @@ void popItem()
     } 
 }
 
-void displayStack()
+int		error(void)
 {
- t_stack *temporary;
-
-  if (top == NULL)
-    printf("\nStack is Exhausted ");
-  else
-  {
-    temporary = begin;
-    printf("\nElements in the stack : ");
-    printf("\nLeft-Most Element Represents Bottom  :  ");
-    printf("Right-Most Element Represents Top \n\n");
-    printf("%d", temporary -> element);
-    while(temporary != top)
-    {
-      temporary = temporary -> next;
-      printf("\t%d ", temporary -> element);
-    }
-  }
- }
-
-int stackMenu()
-{
-  int intChoice;
-
-  printf("\n\nEnter 1 to Push an Element into Stack. ");
-  printf("\nEnter 2 to Pop an Element from Stack. ");
-  printf("\nEnter 3 to Displays the Stack on the Screen.");
-  printf("\nEnter 4 to Stop the Execution of Program.");
-  printf("\nEnter your choice (0 <= N <= 4): ");
-  scanf("%d", &intChoice);
-  
-  return intChoice;
+	write(1, "Error\n", 6);
+	return (-1);
 }
 
-void main(int argv, char **argc)
+ t_stack    *getlist(char *p)
 {
-  int     intChoice;
-  t_stack *newnode;
-  char **p;
+  t_stack *temporary;
+  int i;
 
-  /* check the data*/
-  p = ft_strsplit(argc[1], ' ');
-  do
+  i = 0;
+  temporary = (t_stack *)malloc(sizeof(t_stack));
+  while (p[i])
   {
-    intChoice = stackMenu();
-    switch(intChoice)
+    if (ft_isdigit(p[i]) || p[i] == '-')
+        i++;
+    else
+      exit(error());
+  }
+  temporary -> element = ft_atoi(p);
+  temporary -> next = NULL;
+  return (temporary);
+}
+
+int   main(int argv, char **argc)
+{
+  t_stack   *a;
+  char      **p;
+  int       i;
+
+  i = -1;
+  /* check the data*/
+  if (argv == 2)
+  {
+    p = ft_strsplit(argc[1], ' ');
+    while(p[++i]) 
     {
-      case 1:
-        newnode = getnode();
-        push(newnode);
-        break;
-      case 2:
-        popItem();
-        break;
-      case 3:
-        displayStack();
-        break;
-      case 4:
-        exit(0);
+      a = getlist(p[i]);
+      push(a);
     }
-    fflush(stdin);
-  } 
-  while (1);
+  displayStack();
+  }
+  else 
+    exit(error());
+  return(1);
 }
 
