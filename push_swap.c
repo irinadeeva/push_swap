@@ -99,25 +99,63 @@ some arguments are bigger than an integer => varify_integer(char *p)
 there are duplicates.
 */
 
+
+void  check_duplicates(char **p)
+{
+  int i;
+  int len;
+  int k;
+
+  len = 0;
+  while (p[len])
+    len++;
+  if (len == 1)
+  {
+    i = 0;
+    p[0][i] == '-' || p[0][i] == '+' ? i++ : 0;
+    if (p[0][i] == '0' && p[0][++i] != '\0')  
+          exit(error());
+  }
+  while(--len)
+  {
+    i = 0;
+    k = len;
+    while (i < k)
+    {
+       if (p[k][0] == '0' && p[k][1] != '\0')  
+          exit(error());
+       if (ft_strlen(p[i]) == ft_strlen(p[k])) 
+          ft_strcmp(p[i], p[k]) == 0 ? exit(error()) : i++;
+       else 
+          i++;
+    }
+  }
+}
+
 int varify_integer(char *p)
 {
   int  i;
 
   i = 0;
-  p[i] == '-' ? i++ : 0;
-  p[i] == '1' || p[i] == '2' ? i++ : exit(error());
-  p[i] == '0' || p[i] == '1' ? i++ : exit(error());
-  p[i] >= '0' && p[i] <= '4' ? i++ : exit(error());
-  p[i] >= '0' && p[i] <= '7' ? i++ : exit(error());
-  p[i] >= '0' && p[i] <= '4' ? i++ : exit(error());
-  p[i] >= '0' && p[i] <= '8' ? i++ : exit(error());
-  p[i] >= '0' && p[i] <= '3' ? i++ : exit(error());
-  p[i] >= '0' && p[i] <= '6' ? i++ : exit(error());
-  p[i] >= '0' && p[i] <= '4' ? i++ : exit(error());
-  if (p[0] == '-')
-    p[i] >= '0' && p[i] <= '8' ? i++ : exit(error());
-  else 
+  p[0] == '-' || p[0] == '+' ? i++ : 0;
+  if (p[i] >= '3')
+    exit(error());
+  else if (p[i] == '2')
+  { 
+    i++;
+    p[i] == '0' || p[i] == '1' ? i++ : exit(error());
+    p[i] >= '0' && p[i] <= '4' ? i++ : exit(error());
     p[i] >= '0' && p[i] <= '7' ? i++ : exit(error());
+    p[i] >= '0' && p[i] <= '4' ? i++ : exit(error());
+    p[i] >= '0' && p[i] <= '8' ? i++ : exit(error());
+    p[i] >= '0' && p[i] <= '3' ? i++ : exit(error());
+    p[i] >= '0' && p[i] <= '6' ? i++ : exit(error());
+    p[i] >= '0' && p[i] <= '4' ? i++ : exit(error());
+    if (p[0] == '-')
+      p[i] >= '0' && p[i] <= '8' ? i++ : exit(error());
+    else 
+      p[i] >= '0' && p[i] <= '7' ? i++ : exit(error());
+  }
   return (1);
 }
 
@@ -127,9 +165,9 @@ int varify_integer(char *p)
   int i;
 
   i = 0;
-  (ft_strlen(p) > 11 || (ft_strlen(p) == 11 && p[i] != '-')) ? exit(error()) : 0;
-  (ft_strlen(p) == 10 || (ft_strlen(p) == 11 && p[i] == '-')) ? varify_integer(p) : 0;
-  p[0] == '-' ? i++ : 0;
+  (ft_strlen(p) > 11) ? exit(error()) : 0;
+  (ft_strlen(p) == 10 || (ft_strlen(p) == 11 && (p[i] == '-' || p[i] == '+'))) ? varify_integer(p) : 0;
+  p[0] == '-' || p[0] == '+'  ? i++ : 0;
   while (p[i])
      ft_isdigit(p[i]) ? i++ : exit(error());
   temporary = (t_stack *)malloc(sizeof(t_stack));
@@ -145,11 +183,11 @@ int   main(int argv, char **argc)
   int       i;
 
   i = -1;
-  /* check the data*/
+  /* check the inputing data*/
   if (argv == 2)
   {
     p = ft_strsplit(argc[1], ' ');
-    
+    check_duplicates(p);
     while(p[++i]) 
     {
       a = getlist(p[i]);
