@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/a.out",
-            "args": ["+2147483647"],
+            "args": [""],
             "preLaunchTask": "echo",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

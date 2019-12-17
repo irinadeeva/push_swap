@@ -9,9 +9,15 @@ typedef struct s_stack
     struct s_stack *next;
 }               t_stack;
 
+typedef struct		s_stacks
+{
+	t_stack     *a;
+	t_stack			*b;
+  int         len_a;
+}                 t_stacks;
+
 t_stack *begin = NULL;
 t_stack *top = NULL;
-
 
 void displayStack()
 {
@@ -33,7 +39,6 @@ void displayStack()
     }
  // }
  }
-
 
 void push(t_stack *a)
 {
@@ -96,25 +101,24 @@ int		error(void)
 /* check the data: 
 some arguments aren’t integers,
 some arguments are bigger than an integer => varify_integer(char *p)
-there are duplicates.
+there are duplicates. => check_duplicates(char **p)
+check_duplicates(char **p) helps to detect cases like "01" or ""
 */
 
-
-void  check_duplicates(char **p)
+void  check_duplicates(char **p, t_stacks *s)
 {
   int i;
-  int len;
   int k;
+  int len;
 
-  len = 0;
-  while (p[len])
-    len++;
+  while (p[s->len_a])
+    s->len_a++;
+  ((len = s->len_a) == 0) ? exit(error()) : 0;
   if (len == 1)
   {
     i = 0;
     p[0][i] == '-' || p[0][i] == '+' ? i++ : 0;
-    if (p[0][i] == '0' && p[0][++i] != '\0')  
-          exit(error());
+    p[0][i] == '0' && p[0][++i] != '\0' ? exit(error()) : 0;
   }
   while(--len)
   {
@@ -122,8 +126,7 @@ void  check_duplicates(char **p)
     k = len;
     while (i < k)
     {
-       if (p[k][0] == '0' && p[k][1] != '\0')  
-          exit(error());
+       (p[k][0] == '0' && p[k][1] != '\0') ? exit(error()) : 0;
        if (ft_strlen(p[i]) == ft_strlen(p[k])) 
           ft_strcmp(p[i], p[k]) == 0 ? exit(error()) : i++;
        else 
@@ -176,27 +179,45 @@ int varify_integer(char *p)
   return (temporary);
 }
 
-int   main(int argv, char **argc)
+void  create_stack_a(char **argc, t_stacks *s)
 {
-  t_stack   *a;
   char      **p;
   int       i;
 
   i = -1;
-  /* check the inputing data*/
+  p = ft_strsplit(argc[1], ' ');
+  check_duplicates(p, s);
+  while(p[++i]) 
+  {
+    s->a = getlist(p[i]);
+    push(s->a);
+  }
+  free(p);
+}
+
+t_stacks *create_stacks(char **argc)
+{
+  t_stacks *s;
+
+  if (!(s = (t_stacks*)malloc(sizeof(t_stacks))))
+    exit(error());
+  s->a = NULL;
+  s->b = NULL;
+  s->len_a = 0;
+  create_stack_a(argc, s);
+  return(s);
+}
+
+int   main(int argv, char **argc)
+{
+  t_stacks   *s;
+
   if (argv == 2)
   {
-    p = ft_strsplit(argc[1], ' ');
-    check_duplicates(p);
-    while(p[++i]) 
-    {
-      a = getlist(p[i]);
-      push(a);
-    }
-  displayStack();
+    s = create_stacks(argc);
+    displayStack();
   }
   else 
     exit(error());
   return(1);
 }
-
