@@ -10,6 +10,8 @@
             "args": [
                 "-g",
                 "push_swap.c",
+                "verification.c",
+                "create_stack.c",
                 "libft/libft.a"
             ],
             "group": {

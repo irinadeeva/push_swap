@@ -1,14 +1,18 @@
 NAME = 	push_swap
 
 SRCS = 	push_swap.c \
+		verification.c\
+		create_stack.c\
 
 OBJS = 	push_swap.o \
+		verification.o\
+		create_stack.o\
 
 FLAGS = -Wall -Wextra -Werror
 
 LIB = make -C libft/
 
-H_DIR = ./
+H_DIR = ft_push_swap.h
 
 LIB_DIR = ./libft/
 
