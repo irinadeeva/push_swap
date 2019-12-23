@@ -10,10 +10,12 @@ void displayStack()
 
     temporary = begin;
     printf("%d", temporary -> element);
+    printf("\t%d ", temporary -> for_max_seq);
     while(temporary != top)
     {
       temporary = temporary -> next;
       printf("\t%d ", temporary -> element);
+      printf("\t%d ", temporary -> for_max_seq);
     }
  }
 
@@ -75,27 +77,33 @@ int		error(void)
 	return (-1);
 }
 
-int  look_for_max_sequence(t_stacks *s)
+int  look_for_max_sequence()
 {
    t_stack  *tmp;
    t_stack  *tmp_2;
+   int  max;
 
-  if (begin == top)
+  if (begin == top) 
     return (1);
    tmp = begin;
    tmp_2 = tmp->next;
-   while (tmp_2->i <= s->len_a)
+   max = 1;
+   while (tmp_2)
    {
+     tmp = begin;
      while (tmp->i < tmp_2->i)
      {
        if (tmp->element < tmp_2->element)
        {
          if(tmp_2->for_max_seq <= tmp->for_max_seq)
+          { 
             tmp_2->for_max_seq = tmp->for_max_seq + 1;
+            max < tmp_2->for_max_seq ? max = tmp_2->for_max_seq : 0;
+          }
        }
-      tmp->i++;
+      tmp = tmp->next;
      }
-     tmp_2->i++;
+     tmp_2 = tmp_2->next;
    }
    return(1);
 }
@@ -107,7 +115,7 @@ int   main(int argv, char **argc)
   if (argv == 2)
   {
     s = create_stacks(argc);
-    look_for_max_sequence(s);
+    look_for_max_sequence();
     displayStack();
   }
   else 
