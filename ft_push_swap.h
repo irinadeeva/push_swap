@@ -9,6 +9,7 @@ typedef struct s_stack
 {
     int            element;
     int            i;
+    int            for_max_seq;
     struct s_stack *next;
 }               t_stack;
 

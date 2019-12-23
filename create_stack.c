@@ -16,6 +16,7 @@
   temporary = (t_stack *)malloc(sizeof(t_stack));
   temporary -> element = ft_atoi(p);
   temporary -> i = k;
+  temporary -> for_max_seq = 1;
   temporary -> next = NULL;
   return (temporary);
 }

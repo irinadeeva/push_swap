@@ -1,4 +1,4 @@
-/* This program implements a stack in terms of a linked list. */
+
 # include "ft_push_swap.h"
 
 t_stack *begin = NULL;
@@ -75,12 +75,29 @@ int		error(void)
 	return (-1);
 }
 
-void  look_for_max_sequence(t_stacks *s)
+int  look_for_max_sequence(t_stacks *s)
 {
-   t_stack  *temporary;
+   t_stack  *tmp;
+   t_stack  *tmp_2;
 
-   temporary = begin;
-   
+  if (begin == top)
+    return (1);
+   tmp = begin;
+   tmp_2 = tmp->next;
+   while (tmp_2->i <= s->len_a)
+   {
+     while (tmp->i < tmp_2->i)
+     {
+       if (tmp->element < tmp_2->element)
+       {
+         if(tmp_2->for_max_seq <= tmp->for_max_seq)
+            tmp_2->for_max_seq = tmp->for_max_seq + 1;
+       }
+      tmp->i++;
+     }
+     tmp_2->i++;
+   }
+   return(1);
 }
 
 int   main(int argv, char **argc)
