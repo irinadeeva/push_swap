@@ -1,6 +1,9 @@
 # include "ft_push_swap.h"
 
-/* This functions implement a stack in terms of a linked list. */ 
+/* 
+** This functions  - implement a stack in terms of a linked list
+**                 - varify data (only integers).
+*/ 
 
  t_stack    *getlist(char *p, int k)
 {
@@ -18,11 +21,13 @@
   temporary -> i = k;
   temporary -> for_max_seq = 1;
   temporary -> next = NULL;
+  free(p);
   return (temporary);
 }
 
 void  create_stack_a(char **argc, t_stacks *s)
 {
+  t_stack     *temporary;
   char      **p;
   int       i;
   int       k;
@@ -34,10 +39,11 @@ void  create_stack_a(char **argc, t_stacks *s)
   check_duplicates(p, s);
   while(p[++i]) 
   {
-    s->a = getlist(p[i], k);
+    temporary = getlist(p[i], k);
     k++;
-    push(s->a);
+    push(s, temporary);
   }
+  s->top_a->next = s->a;
   free(p);
 }
 
@@ -50,6 +56,8 @@ t_stacks *create_stacks(char **argc)
   s->a = NULL;
   s->b = NULL;
   s->len_a = 0;
+  s->top_a = NULL;
+  s->top_b = NULL;
   create_stack_a(argc, s);
   return(s);
 }

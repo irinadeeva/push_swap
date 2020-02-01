@@ -15,44 +15,42 @@ void reset ()
   printf("\033[0m");
 }
 
-void displayStack()
+void displayStack(t_stacks *s)
 {
   t_stack *temporary;
 
-    temporary = begin;
-    printf("%d", temporary -> element);
-    printf("\t%d ", temporary -> for_max_seq);
-    while(temporary != top)
+    temporary = s->a;
+    printf("\t%d", temporary->element);
+    reset();
+    printf("\t%d ", temporary->for_max_seq);
+    yellow();
+    temporary = temporary->next;
+    while(temporary != s->a)
     {
-      temporary = temporary -> next;
-      printf("\t%d ", temporary -> element);
+      printf("\t%d ", temporary->element);
       reset();
-      printf("\t%d ", temporary -> for_max_seq);
+      printf("\t%d ", temporary->for_max_seq);
       yellow();
+      temporary = temporary->next;
     }
  }
 
-void push(t_stack *a)
+void push(t_stacks *s, t_stack *temporary)
 {
-   t_stack *temporary;
-
-    if (a == NULL)
+    //if (s->a == NULL)
+    //{
+    //   printf("\nThe Stack is Completely Fillled");
+    //    return;
+    //}
+    if (s->top_a == NULL)
     {
-        printf("\nThe Stack is Completely Fillled");
-        return;
+      s->top_a = temporary;
+      s->a = temporary;
     }
-    if (begin == NULL)
+    else if(s->top_a->next == NULL) 
     {
-        begin = a;
-        top = a;
-    }
-    else 
-    {
-      temporary = begin;
-      while (temporary -> next != NULL)
-          temporary = temporary -> next;
-      temporary -> next = a;
-      top = a;
+      s->top_a->next = temporary;
+      s->top_a = s->top_a->next;
     }
 }
 
@@ -87,24 +85,24 @@ void popItem()
 int		error(void)
 {
 	write(1, "Error\n", 6);
-	return (-1);
+	exit(1);
 }
 
-void  compare_elements(int *max)
+void  compare_elements(t_stacks *s, int *max)
 {
   t_stack  *tmp;
   t_stack  *tmp_2;
 
-  tmp = begin;
+  tmp = s->a;
   tmp_2 = tmp->next;
-  while (tmp_2)
+  while (tmp_2 != s->a)
    {
-     tmp = begin;
+     tmp = s->a;
      while (tmp->i < tmp_2->i)
      {
        if (tmp->element < tmp_2->element)
        {
-         if(tmp_2->for_max_seq <= tmp->for_max_seq)
+         if (tmp_2->for_max_seq <= tmp->for_max_seq)
           { 
             tmp_2->for_max_seq = tmp->for_max_seq + 1;
             *max < tmp_2->for_max_seq ? *max = tmp_2->for_max_seq : 0;
@@ -156,17 +154,24 @@ void  compare_elements(int *max)
 }*/
 
 
-int  look_for_max_sequence()
+int  look_for_max_sequence(t_stacks *s)
 {
   int      max;
 
-  if (begin == top) 
+  if (s->a == s->top_a) 
     return (1);
   max = 1;
-  compare_elements(&max);
+  compare_elements(s, &max);
   return(1);
 }
 
+
+/*void min_max(t_stacks *s)
+{
+	s->stat->min = s->a->i;
+	s->stat->max = s->a->i;
+	
+}*/
 
 int   main(int argv, char **argc)
 {
@@ -175,8 +180,9 @@ int   main(int argv, char **argc)
   if (argv == 2)
   {
     s = create_stacks(argc);
-    look_for_max_sequence();
-    displayStack();
+    //min_max(s);
+    look_for_max_sequence(s);
+    displayStack(s);
   }
   else 
     exit(error());

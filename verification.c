@@ -2,9 +2,9 @@
 
 /* check the data: 
 some arguments aren’t integers,
-some arguments are bigger than an integer => varify_integer(char *p)
+some arguments are bigger or smaller than an integer => varify_integer(char *p)
 there are duplicates. => check_duplicates(char **p)
-check_duplicates(char **p) helps to detect cases like "01" or ""
+check_duplicates(char **p) helps to detect cases like "01" or "" as well
 */
 
 void  check_duplicates(char **p, t_stacks *s)
