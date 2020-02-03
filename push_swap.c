@@ -1,5 +1,5 @@
 
-# include "ft_push_swap.h"
+#include "ft_push_swap.h"
 
 t_stack *begin = NULL;
 t_stack *top = NULL;
@@ -20,39 +20,41 @@ void displayStack(t_stacks *s)
   t_stack *temporary;
 
     temporary = s->a;
-    printf("\t%d", temporary->element);
-    reset();
-    printf("\t%d ", temporary->for_max_seq);
+    
+    printf("stack a \t%d", temporary->element);
+    //reset();
+    //printf("\t%d ", temporary->for_max_seq);
     yellow();
     temporary = temporary->next;
     while(temporary != s->a)
     {
       printf("\t%d ", temporary->element);
-      reset();
-      printf("\t%d ", temporary->for_max_seq);
+     // reset();
+     // printf("\t%d ", temporary->for_max_seq);
       yellow();
       temporary = temporary->next;
     }
+    if (s->b != NULL)
+    {
+      temporary = s->b;
+      printf("\n stack b\t%d", temporary->element);
+   // reset();
+  //  printf("\t%d ", temporary->for_max_seq);
+      yellow();
+      temporary = temporary->next;
+      while(temporary != s->b)
+      {
+        printf("\t%d ", temporary->element);
+     // reset();
+     // printf("\t%d ", temporary->for_max_seq);
+        yellow();
+        temporary = temporary->next;
+      }
+    }
+    else 
+      printf("\n stack b empty");
  }
 
-void push(t_stacks *s, t_stack *temporary)
-{
-    //if (s->a == NULL)
-    //{
-    //   printf("\nThe Stack is Completely Fillled");
-    //    return;
-    //}
-    if (s->top_a == NULL)
-    {
-      s->top_a = temporary;
-      s->a = temporary;
-    }
-    else if(s->top_a->next == NULL) 
-    {
-      s->top_a->next = temporary;
-      s->top_a = s->top_a->next;
-    }
-}
 
 void popItem()
 {
@@ -84,7 +86,7 @@ void popItem()
 
 int		error(void)
 {
-	write(1, "Error\n", 6);
+  write(1, "Error\n", 6);
 	exit(1);
 }
 
@@ -114,46 +116,6 @@ void  compare_elements(t_stacks *s, int *max)
    }
 }
 
-
-/*void  rra(t_stacks   *s)
-{
-  t_stack  *tmp;
-  t_stack  *tmp2;
-  int i;
-
-  i = 1;
-  tmp = begin;
-  while (s->len_a - i > 1)
-  {
-    tmp = tmp->next;
-    i++;
-  }
-  tmp->next = NULL;
-  tmp2 = top;
-  top = tmp;
-  if (tmp2 != NULL)
-	{
-		tmp2->next = begin;
-		begin = tmp2;
-	}
-}*/
-
-/*void  indexation()
-{
-  t_stack  *tmp;
-  int i;
-  
-  tmp = begin;
-  i = 0;
-  while(tmp->next != top)
-  {
-    tmp->i = i;
-    tmp = tmp-> next;
-    i++;
-  }
-}*/
-
-
 int  look_for_max_sequence(t_stacks *s)
 {
   int      max;
@@ -164,7 +126,6 @@ int  look_for_max_sequence(t_stacks *s)
   compare_elements(s, &max);
   return(1);
 }
-
 
 void min_max(t_stacks *s)
 {
@@ -195,7 +156,6 @@ void min_max(t_stacks *s)
 }
 
 
-
 int   main(int argv, char **argc)
 {
   t_stacks   *s;
@@ -203,7 +163,8 @@ int   main(int argv, char **argc)
   if (argv == 2)
   {
     s = create_stacks(argc);
-    min_max(s);
+    throw_to_stack_b(s);
+    //min_max(s);
     //look_for_max_sequence(s);
     displayStack(s);
   }

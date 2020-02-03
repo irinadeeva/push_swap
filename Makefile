@@ -3,10 +3,14 @@ NAME = 	push_swap
 SRCS = 	push_swap.c \
 		verification.c\
 		create_stack.c\
+		commads.c\
+		throwing.c\
 
 OBJS = 	push_swap.o \
 		verification.o\
 		create_stack.o\
+		commads.o\
+		throwing.o\
 
 FLAGS = -Wall -Wextra -Werror
 

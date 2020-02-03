@@ -36,5 +36,11 @@ int     varify_integer(char *p);
 int		error(void);
 t_stacks *create_stacks(char **argc);
 void    push(t_stacks *s, t_stack *temporary);
+void    pb(t_stacks *s);
+void  throw_to_stack_b(t_stacks *s);
+void    sa(t_stacks *s);
+void    ra(t_stacks *s);
+void    rra(t_stacks *s);
+void  sort_3(t_stacks *s)
 
 #endif

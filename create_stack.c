@@ -5,6 +5,26 @@
 **                 - varify data (only integers).
 */ 
 
+
+void push(t_stacks *s, t_stack *temporary)
+{
+    //if (s->a == NULL)
+    //{
+    //   printf("\nThe Stack is Completely Fillled");
+    //    return;
+    //}
+    if (s->top_a == NULL)
+    {
+      s->top_a = temporary;
+      s->a = temporary;
+    }
+    else if(s->top_a->next == NULL) 
+    {
+      s->top_a->next = temporary;
+      s->top_a = s->top_a->next;
+    }
+}
+
  t_stack    *getlist(char *p, int k)
 {
   t_stack     *temporary;
