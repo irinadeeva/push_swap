@@ -166,12 +166,35 @@ int  look_for_max_sequence(t_stacks *s)
 }
 
 
-/*void min_max(t_stacks *s)
+void min_max(t_stacks *s)
 {
-	s->stat->min = s->a->i;
-	s->stat->max = s->a->i;
-	
-}*/
+	t_stack  *tmp;
+
+  tmp = s->a;
+  s->stat->i_max = tmp->i;
+  s->stat->max = tmp->element;
+  s->stat->i_min = tmp->i;
+	s->stat->min = tmp->element;
+  tmp = tmp->next;
+  while (tmp != s->a)
+  {
+    if (tmp->element > s->stat->max)
+    {
+      s->stat->i_max = tmp->i;
+      s->stat->max = tmp->element;
+    }
+    else if (tmp->element < s->stat->min)
+    {
+      s->stat->i_min = tmp->i;
+	    s->stat->min = tmp->element;
+    }
+    tmp = tmp->next;
+  }
+  printf("max %d and i %d\n", s->stat->max, s->stat->i_max);
+  printf("min %d and i %d\n", s->stat->min, s->stat->i_min);
+}
+
+
 
 int   main(int argv, char **argc)
 {
@@ -180,8 +203,8 @@ int   main(int argv, char **argc)
   if (argv == 2)
   {
     s = create_stacks(argc);
-    //min_max(s);
-    look_for_max_sequence(s);
+    min_max(s);
+    //look_for_max_sequence(s);
     displayStack(s);
   }
   else 

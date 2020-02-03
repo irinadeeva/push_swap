@@ -47,6 +47,18 @@ void  create_stack_a(char **argc, t_stacks *s)
   free(p);
 }
 
+t_stat  *create_statistic()
+{
+  t_stat     *temporary;
+  
+  temporary = (t_stat *)malloc(sizeof(t_stat));
+  temporary->i_max = 0;
+  temporary->i_min = 0;
+  temporary->max = 0;
+  temporary->min = 0;
+  return (temporary);
+}
+
 t_stacks *create_stacks(char **argc)
 {
   t_stacks *s;
@@ -58,6 +70,7 @@ t_stacks *create_stacks(char **argc)
   s->len_a = 0;
   s->top_a = NULL;
   s->top_b = NULL;
+  s->stat = create_statistic();
   create_stack_a(argc, s);
   return(s);
 }

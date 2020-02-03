@@ -17,6 +17,8 @@ typedef struct s_statistic
 {
     int            min;
     int            max;
+    int            i_min;
+    int            i_max;
 }               t_stat;
 
 typedef struct		s_stacks
