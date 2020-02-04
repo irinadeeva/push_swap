@@ -37,10 +37,10 @@ void push(t_stacks *s, t_stack *temporary)
   while (p[i])
      ft_isdigit(p[i]) ? i++ : exit(error());
   temporary = (t_stack *)malloc(sizeof(t_stack));
-  temporary -> element = ft_atoi(p);
-  temporary -> i = k;
-  temporary -> for_max_seq = 1;
-  temporary -> next = NULL;
+  temporary->element = ft_atoi(p);
+  temporary->i = k;
+  temporary->oper_cost = 0;
+  temporary->next = NULL;
   free(p);
   return (temporary);
 }
@@ -88,6 +88,7 @@ t_stacks *create_stacks(char **argc)
   s->a = NULL;
   s->b = NULL;
   s->len_a = 0;
+  s->len_b = 0;
   s->top_a = NULL;
   s->top_b = NULL;
   s->stat = create_statistic();

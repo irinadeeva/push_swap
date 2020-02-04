@@ -4,6 +4,11 @@
 t_stack *begin = NULL;
 t_stack *top = NULL;
 
+int		error(void)
+{
+  write(1, "Error\n", 6);
+	exit(1);
+}
 
 void yellow()
 {
@@ -21,32 +26,32 @@ void displayStack(t_stacks *s)
 
     temporary = s->a;
     
-    printf("stack a \t%d", temporary->element);
-    //reset();
-    //printf("\t%d ", temporary->for_max_seq);
+    printf("stack a \t%d " , temporary->element);
+    reset();
+    printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
     yellow();
     temporary = temporary->next;
     while(temporary != s->a)
     {
       printf("\t%d ", temporary->element);
-     // reset();
-     // printf("\t%d ", temporary->for_max_seq);
+      reset();
+      printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
       yellow();
       temporary = temporary->next;
     }
     if (s->b != NULL)
     {
       temporary = s->b;
-      printf("\n stack b\t%d", temporary->element);
-   // reset();
-  //  printf("\t%d ", temporary->for_max_seq);
+      printf("\n stack b\t%d ", temporary->element);
+      reset();
+      printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
       yellow();
       temporary = temporary->next;
       while(temporary != s->b)
       {
         printf("\t%d ", temporary->element);
-     // reset();
-     // printf("\t%d ", temporary->for_max_seq);
+        reset();
+        printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
         yellow();
         temporary = temporary->next;
       }
@@ -56,7 +61,7 @@ void displayStack(t_stacks *s)
  }
 
 
-void popItem()
+/*void popItem()
 {
  t_stack *temporary;
   
@@ -82,12 +87,6 @@ void popItem()
         free(top);
         top = temporary;
     } 
-}
-
-int		error(void)
-{
-  write(1, "Error\n", 6);
-	exit(1);
 }
 
 void  compare_elements(t_stacks *s, int *max)
@@ -153,7 +152,7 @@ void min_max(t_stacks *s)
   }
   printf("max %d and i %d\n", s->stat->max, s->stat->i_max);
   printf("min %d and i %d\n", s->stat->min, s->stat->i_min);
-}
+}*/
 
 
 int   main(int argv, char **argc)
@@ -163,7 +162,10 @@ int   main(int argv, char **argc)
   if (argv == 2)
   {
     s = create_stacks(argc);
-    throw_to_stack_b(s);
+    s->len_b = throw_to_stack_b(s);
+    printf("length a %d\n", s->len_a);
+    printf("length b %d\n", s->len_b);
+    cost_of_operation(s);
     //min_max(s);
     //look_for_max_sequence(s);
     displayStack(s);

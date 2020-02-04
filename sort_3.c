@@ -6,11 +6,16 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:55:29 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/03 20:15:39 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/04 14:37:12 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
+
+/* 
+** This functions sort 5 case: 
+**  1 3 2, 2 1 3, 2 3 1, 3 1 2, 3 2 1 
+*/ 
 
 void  sort_3(t_stacks *s)
 {
@@ -21,22 +26,17 @@ void  sort_3(t_stacks *s)
     x = s->a->element; 
     y = s->a->next->element;
     z = s->a->next->next->element;
-    //if (x < y && x < z && y < z) // case 1
-    
-    if (x < y && x < z && z < y) // case 2
+    (x > y && x < z && y < z) ? sa(s) : 0;
+    (x < y && x > z && y > x) ? rra(s) : 0;
+    (x > y && x > z && y < z) ? ra(s) : 0;
+    if (x < y && x < z && z < y)
     {
-        sa(s->a);
-        ra(s->a);
+        sa(s);
+        ra(s);
     }
-    else if (x > y && x < z && y < z) // case 3
-        sa(s->a);
-    else if (x < y && x > z && y > x)
-        rra(s->a);
-    else if (x > y && x > z && y < z)
-        ra(s->a);
     else if (x > y && x > z && y > z)
     {
-        sa(s->a);
-        rra(s->a); 
+        sa(s);
+        rra(s); 
     }
 }

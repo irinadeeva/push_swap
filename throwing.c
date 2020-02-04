@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:39:47 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/03 18:55:40 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/04 18:37:26 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,26 @@
 
 /* 
 ** throwing elements of stack a to stack b until
-** - they are sorted or
+** - they are sorted (check_sort) or
 ** - they are 3 
+** new indexation
 */
+
+
+void indexation(t_stack *a)
+{
+  int i;
+  t_stack *tmp;
+
+  tmp = a->next;
+  i = 0;
+  a->i = i++;
+  while (tmp != a)
+  {
+    tmp->i = i++;
+    tmp = tmp->next;
+  }
+}
 
 int check_sort(t_stacks *s, int quality)
 {
@@ -39,7 +56,7 @@ int check_sort(t_stacks *s, int quality)
   return (0);
 }
 
-void  throw_to_stack_b(t_stacks *s)
+int  throw_to_stack_b(t_stacks *s)
 {
   t_stack  *tmp;
   int quality;
@@ -53,7 +70,12 @@ void  throw_to_stack_b(t_stacks *s)
     quality--;   
   }
   if (quality != s->len_a)
+  {
       s->top_b->next = s->b;
+      indexation(s->b);
+  }
   if (quality == 3)
-    sort_3(s->a);
+    sort_3(s);
+  indexation(s->a);
+  return(s->len_a - quality);
 }
