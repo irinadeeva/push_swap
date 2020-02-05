@@ -28,14 +28,14 @@ void displayStack(t_stacks *s)
     
     printf("stack a \t%d " , temporary->element);
     reset();
-    printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
+   // printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
     yellow();
     temporary = temporary->next;
     while(temporary != s->a)
     {
       printf("\t%d ", temporary->element);
       reset();
-      printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
+     // printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
       yellow();
       temporary = temporary->next;
     }
@@ -44,14 +44,14 @@ void displayStack(t_stacks *s)
       temporary = s->b;
       printf("\n stack b\t%d ", temporary->element);
       reset();
-      printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
+      printf("i = \t%d  cost %d\n", temporary->i, temporary->oper_cost);
       yellow();
       temporary = temporary->next;
       while(temporary != s->b)
       {
         printf("\t%d ", temporary->element);
         reset();
-        printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
+        printf("i = %d  cost %d\n", temporary->i, temporary->oper_cost);
         yellow();
         temporary = temporary->next;
       }

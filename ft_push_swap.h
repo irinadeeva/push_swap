@@ -37,11 +37,23 @@ int     varify_integer(char *p);
 int		error(void);
 t_stacks *create_stacks(char **argc);
 void    push(t_stacks *s, t_stack *temporary);
-void    pb(t_stacks *s);
 int     throw_to_stack_b(t_stacks *s);
+
 void    sa(t_stacks *s);
+void    sb(t_stacks *s);
+void    ss(t_stacks *s);
+
 void    ra(t_stacks *s);
+void    rb(t_stacks *s);
+void    rr(t_stacks *s);
+
 void    rra(t_stacks *s);
+void    rrb(t_stacks *s);
+void    rrr(t_stacks *s);
+
+void    pb(t_stacks *s);
+void    pa(t_stacks *s);
+
 void    sort_3(t_stacks *s);
 void    cost_of_operation(t_stacks *s);
 
