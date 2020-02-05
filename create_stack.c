@@ -25,6 +25,19 @@ void push(t_stacks *s, t_stack *temporary)
     }
 }
 
+t_cost  *create_cost()
+{
+  t_cost     *temporary;
+  
+  temporary = (t_cost *)malloc(sizeof(t_cost));
+  temporary->direction_a = 0;
+  temporary->direction_b = 0;
+  temporary->oper_a = 0;
+  temporary->oper_b = 0;
+  return (temporary);
+}
+
+
  t_stack    *getlist(char *p, int k)
 {
   t_stack     *temporary;
@@ -39,7 +52,7 @@ void push(t_stacks *s, t_stack *temporary)
   temporary = (t_stack *)malloc(sizeof(t_stack));
   temporary->element = ft_atoi(p);
   temporary->i = k;
-  temporary->oper_cost = 0;
+  temporary->cost = create_cost();
   temporary->next = NULL;
   free(p);
   return (temporary);

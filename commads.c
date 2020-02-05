@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:28:40 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/05 13:56:40 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/05 18:09:55 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void  pa(t_stacks *s)
       tmp = s->a;
       s->a = s->b;
       s->top_a->next = s->a;
-      s->a = tmp;
+      s->a->next = tmp;
       s->b = NULL;
       s->top_b = NULL;
     }
@@ -34,7 +34,7 @@ void  pa(t_stacks *s)
     tmp2 = s->a;
     s->a = tmp;
     s->top_a->next = s->a;
-    s->a = tmp2;
+    s->a->next = tmp2;
   }
 }
 

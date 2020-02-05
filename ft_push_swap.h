@@ -5,11 +5,20 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+typedef struct s_cost
+{
+    int            oper_b;              
+    int            oper_a;
+    int            direction_a;   // 0 - no action, 1 = скидывать с begin to top, -1 = поднимать с топа наверх
+    int            direction_b;
+}               t_cost;
+
+
 typedef struct s_stack
 {
     int            element;
     int            i;                  // number of an element
-    int            oper_cost;
+    t_cost         *cost;
     struct s_stack *next;
 }               t_stack;
 
@@ -56,5 +65,7 @@ void    pa(t_stacks *s);
 
 void    sort_3(t_stacks *s);
 void    cost_of_operation(t_stacks *s);
+void indexation(t_stack *a);
+void displayStack(t_stacks *s);
 
 #endif

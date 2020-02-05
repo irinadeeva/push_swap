@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:32:11 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/05 13:59:09 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/05 18:28:37 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,20 @@ void    cost_in_b(t_stacks *s)
     k = 0;
     middle_b = s->len_b / 2 + 1;
     tmp = s->b;
-    tmp->oper_cost = k;
+    tmp->cost->oper_b = k;
     tmp = tmp->next;
     while (tmp != s->b)
     {
         if (tmp->i < middle_b)
-            tmp->oper_cost = ++k;
+        {
+            tmp->cost->oper_b = ++k;
+            tmp->cost->direction_b = 1;
+        }
         else
-            (s->len_b % 2) ? tmp->oper_cost = k-- : (tmp->oper_cost = --k);
+        {
+            (s->len_b % 2) ? tmp->cost->oper_b = k-- : (tmp->cost->oper_b = --k);
+            tmp->cost->direction_b = -1;
+        }
         tmp = tmp->next;           
     }
 }
@@ -68,7 +74,8 @@ void    cost_in_a(t_stacks *s)
                 if ((tmp->element > element) && (element > tmp2->element))
                 {   
                     (tmp->i < middle_a) ? k++ : k--;
-                    tmp3->oper_cost =  tmp3->oper_cost + k;
+                    (tmp->i < middle_a) ? (tmp3->cost->direction_a = 1) : (tmp3->cost->direction_a = -1);
+                    tmp3->cost->oper_a =  tmp3->cost->oper_a + k;
                     break;
                 }
                 else
@@ -95,7 +102,8 @@ void    cost_in_a(t_stacks *s)
                 if ((tmp->element > element) && (element > tmp2->element))
                 {   
                     (tmp->i < middle_a) ? k++ : k;
-                    tmp3->oper_cost =  tmp3->oper_cost + k;
+                    (tmp->i < middle_a) ? (tmp3->cost->direction_a = 1) : (tmp3->cost->direction_a = -1);
+                    tmp3->cost->oper_a =  tmp3->cost->oper_a + k;
                     break;
                 }
                 else
@@ -112,9 +120,124 @@ void    cost_in_a(t_stacks *s)
     
 }
 
+int    find_min(t_stacks *s)
+{
+    t_stack *tmp;
+    t_stack *tmp2;
+    int  min;
+    int k;
+    int i;
+    
+    i = 0;
+    if (s->top_b != NULL)
+    {
+        tmp = s->b;
+        tmp2 = tmp->next;
+        min = tmp->cost->oper_a + tmp->cost->oper_b;
+        k = tmp2->cost->oper_a + tmp2->cost->oper_b;
+        i = tmp->i;
+        while (tmp2 != s->b)
+        {
+            if (min > k) 
+            {
+                min = k;
+                i = tmp2->i;
+            }
+            tmp2 = tmp2->next;
+            k = tmp2->cost->oper_a + tmp2->cost->oper_b;
+        }
+    }  
+    return(i); 
+}
+
+void throw_to_stack_a(t_stacks *s, int i)
+{
+    t_stack *tmp;
+
+    tmp = s->b;
+    while (tmp->i != i)
+        tmp = tmp->next;
+    /*if (tmp->cost->direction_a == tmp->cost->direction_b)
+    {
+        if (tmp->cost->direction_a == 1)
+        {
+            while (tmp->cost->oper_a-- || tmp->cost->oper_b--)
+                rr(s);
+            while (tmp->cost->oper_a--)
+                    ra(s);
+            while (tmp->cost->oper_b--)
+                    rb(s); 
+        }
+        else if (tmp->cost->direction_a == -1)
+        {
+           while (tmp->cost->oper_a-- || tmp->cost->oper_b--)
+                rrr(s);
+            while (tmp->cost->oper_a--)
+                rra(s);        
+            while (tmp->cost->oper_b--)
+                rrb(s); 
+        }
+    }
+    else*/
+    {
+        if (tmp->cost->direction_a == 1)
+        {
+            while (tmp->cost->oper_a--)
+                    ra(s); 
+        }
+        if (tmp->cost->direction_a == -1)
+        {
+            while (tmp->cost->oper_a--)
+                rra(s); 
+        }
+        if (tmp->cost->direction_b == 1)
+        {
+            while (tmp->cost->oper_b--)
+                    rb(s); 
+        }
+        if (tmp->cost->direction_b == -1)
+        {
+            while (tmp->cost->oper_b--)
+                rrb(s); 
+        }
+    }
+    printf("h!\n");
+    pa(s);
+    s->len_b--;
+    indexation(s->a);
+    if (s->b != NULL)
+        indexation(s->b);
+}
+
+
 void    cost_of_operation(t_stacks *s)
 {
-    cost_in_b(s);
-    cost_in_a(s);
-    //find_min(s);
+    int i;
+    t_stack *tmp;
+    
+    i = s->len_b;
+    while(i--)
+    {
+        displayStack(s);
+        cost_in_b(s);
+        cost_in_a(s);
+        printf("i of min operation %d\n", find_min(s));
+        throw_to_stack_a(s, find_min(s));
+        if (s->b != NULL)
+        {
+            s->b->cost->direction_a = 0;
+            s->b->cost->direction_b = 0;
+            s->b->cost->oper_a = 0;
+            s->b->cost->oper_b = 0;
+            tmp = s->b->next;
+            while (tmp != s->b)
+            {
+                tmp->cost->direction_a = 0;
+                tmp->cost->direction_b = 0;
+                tmp->cost->oper_a = 0;
+                tmp->cost->oper_b = 0;
+                tmp = tmp->next;
+            }   
+        }
+    }
 }
