@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:28:40 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/05 18:09:55 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/06 17:44:03 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,26 @@ void  rr(t_stacks *s)
 
 void rra(t_stacks *s)
 {
+  t_stack *tmp;
+
+  tmp = s->a;
+  while (tmp->next != s->top_a)
+    tmp = tmp->next;
   s->a = s->top_a;
-  s->top_a = s->a->next->next;
+  s->top_a = tmp;  
+  s->top_a->next = s->a;
 }
 
 void rrb(t_stacks *s)
 {
+  t_stack *tmp;
+
+  tmp = s->b;
+  while (tmp->next != s->top_b)
+    tmp = tmp->next;
   s->b = s->top_b;
-  s->top_b = s->b->next->next;
+  s->top_b = tmp;  
+  s->top_b->next = s->b;
 }
 
 void  rrr(t_stacks *s)

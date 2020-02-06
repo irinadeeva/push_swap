@@ -65,7 +65,8 @@ void    pa(t_stacks *s);
 
 void    sort_3(t_stacks *s);
 void    cost_of_operation(t_stacks *s);
-void indexation(t_stack *a);
-void displayStack(t_stacks *s);
+void    indexation(t_stack *a);
+void    displayStack(t_stacks *s);
+void min_max(t_stacks *s);
 
 #endif

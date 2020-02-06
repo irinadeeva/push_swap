@@ -124,7 +124,7 @@ int  look_for_max_sequence(t_stacks *s)
   max = 1;
   compare_elements(s, &max);
   return(1);
-}
+}*/
 
 void min_max(t_stacks *s)
 {
@@ -152,8 +152,7 @@ void min_max(t_stacks *s)
   }
   printf("max %d and i %d\n", s->stat->max, s->stat->i_max);
   printf("min %d and i %d\n", s->stat->min, s->stat->i_min);
-}*/
-
+}
 
 int   main(int argv, char **argc)
 {
@@ -166,8 +165,8 @@ int   main(int argv, char **argc)
     printf("length a %d\n", s->len_a);
     printf("length b %d\n", s->len_b);
     cost_of_operation(s);
-    //min_max(s);
     //look_for_max_sequence(s);
+    printf("\n");
     displayStack(s);
   }
   else 
