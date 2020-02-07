@@ -150,8 +150,8 @@ void min_max(t_stacks *s)
     }
     tmp = tmp->next;
   }
-  printf("max %d and i %d\n", s->stat->max, s->stat->i_max);
-  printf("min %d and i %d\n", s->stat->min, s->stat->i_min);
+  //printf("max %d and i %d\n", s->stat->max, s->stat->i_max);
+  //printf("min %d and i %d\n", s->stat->min, s->stat->i_min);
 }
 
 int   main(int argv, char **argc)
@@ -162,11 +162,12 @@ int   main(int argv, char **argc)
   {
     s = create_stacks(argc);
     s->len_b = throw_to_stack_b(s);
-    printf("length a %d\n", s->len_a);
-    printf("length b %d\n", s->len_b);
+    //printf("length a %d\n", s->len_a);
+    //printf("length b %d\n", s->len_b);
     cost_of_operation(s);
     //look_for_max_sequence(s);
     printf("\n");
+    
     displayStack(s);
   }
   else 

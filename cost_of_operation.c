@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:32:11 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/06 22:07:33 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/07 16:14:00 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@
 
 void cost_for_min(t_stacks *s, int middle_a, t_stack *tmp3)
 {
-    if (s->stat->i_min < middle_a)
+    if (s->a->element == s->stat->min)
+    {
+        tmp3->cost->oper_a = 0;
+        tmp3->cost->direction_a = 0;
+    }
+    else if (s->stat->i_min < middle_a)
     {
         tmp3->cost->oper_a = s->stat->i_min;
-        if (s->a->i != s->stat->i_min)
-            tmp3->cost->oper_a = tmp3->cost->oper_a + 1;  
         tmp3->cost->direction_a = 1;
     }
     else
     {
         tmp3->cost->oper_a = s->top_a->i - s->stat->i_min + 1;
-        //if (s->top_a->i == s->stat->i_min)
-        //    tmp3->cost->oper_a = tmp3->cost->oper_a + 1;
         tmp3->cost->direction_a = -1;
     }
      
@@ -41,18 +42,19 @@ void cost_for_min(t_stacks *s, int middle_a, t_stack *tmp3)
 
 void cost_for_max(t_stacks *s, int middle_a, t_stack *tmp3)
 {
-    if (s->stat->i_max < middle_a)
+    if (s->top_a->element == s->stat->max)
     {
-        tmp3->cost->oper_a = s->stat->i_max;    
-        if (s->a->i != s->stat->i_min)
-            tmp3->cost->oper_a = tmp3->cost->oper_a + 1; 
+        tmp3->cost->oper_a = 0;
+        tmp3->cost->direction_a = 0;
+    }
+    else if (s->stat->i_max < middle_a)
+    {
+        tmp3->cost->oper_a = s->stat->i_max + 1;    
         tmp3->cost->direction_a = 1;
     }
     else
     {
-        tmp3->cost->oper_a = s->top_a->i - s->stat->i_max + 1;
-        //if (s->top_a->i == s->stat->i_min)
-        //    tmp3->cost->oper_a = tmp3->cost->oper_a + 1;   
+        tmp3->cost->oper_a = s->top_a->i - s->stat->i_max + 1; 
         tmp3->cost->direction_a = -1;
     }
 }
@@ -99,7 +101,7 @@ void    cost_in_a(t_stacks *s)
     tmp3 = s->b;
     element = tmp3->element;
     middle_a = (s->len_a - s->len_b)/ 2 + 1;
-    printf("middle %d\n", middle_a);
+    //printf("middle %d\n", middle_a);
     if ((s->len_a - s->len_b) % 2 == 0)
     {
         while(len--)
@@ -179,7 +181,7 @@ void    cost_in_a(t_stacks *s)
     
 }
 
-int    find_min(t_stacks *s)
+int    find_min_cost(t_stacks *s)
 {
     t_stack *tmp;
     t_stack *tmp2;
@@ -267,6 +269,24 @@ void throw_to_stack_a(t_stacks *s, int i)
         indexation(s->b);
 }
 
+void    find_new_begin_top(t_stacks *s)
+{
+    t_stack *tmp;
+    t_stack *tmp2;
+    
+    min_max(s);
+    tmp = s->a;
+    tmp2 = tmp->next; 
+    
+    while (tmp2 != tmp)
+    {
+        if (s->stat->max == tmp2->element)
+            s->top_a = tmp2;
+        else if (s->stat->min == tmp2->element)
+            s->a = tmp2;
+        tmp2 = tmp2->next;
+    }      
+}
 
 void    cost_of_operation(t_stacks *s)
 {
@@ -280,7 +300,7 @@ void    cost_of_operation(t_stacks *s)
         cost_in_b(s);
         cost_in_a(s);
         displayStack(s);
-        throw_to_stack_a(s, find_min(s));
+        throw_to_stack_a(s, find_min_cost(s));
         if (s->b != NULL)
         {
             s->b->cost->direction_a = 0;
@@ -297,5 +317,7 @@ void    cost_of_operation(t_stacks *s)
                 tmp = tmp->next;
             }   
         }
+       // find_new_begin_top(s);
     }
+    
 }
