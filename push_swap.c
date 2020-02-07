@@ -166,9 +166,9 @@ int   main(int argv, char **argc)
     //printf("length b %d\n", s->len_b);
     cost_of_operation(s);
     //look_for_max_sequence(s);
-    printf("\n");
     
-    displayStack(s);
+    //printf("\n");
+    //displayStack(s);
   }
   else 
     exit(error());

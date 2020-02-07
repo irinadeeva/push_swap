@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:32:11 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/07 16:14:00 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/07 16:15:24 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,7 +299,7 @@ void    cost_of_operation(t_stacks *s)
         min_max(s);
         cost_in_b(s);
         cost_in_a(s);
-        displayStack(s);
+        //displayStack(s);
         throw_to_stack_a(s, find_min_cost(s));
         if (s->b != NULL)
         {
@@ -317,7 +317,6 @@ void    cost_of_operation(t_stacks *s)
                 tmp = tmp->next;
             }   
         }
-       // find_new_begin_top(s);
     }
-    
+    find_new_begin_top(s);
 }
