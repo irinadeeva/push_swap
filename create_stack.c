@@ -29,7 +29,8 @@ t_cost  *create_cost()
 {
   t_cost     *temporary;
   
-  temporary = (t_cost *)malloc(sizeof(t_cost));
+  if (!(temporary = (t_cost *)malloc(sizeof(t_cost))))
+      exit(error());
   temporary->direction_a = 0;
   temporary->direction_b = 0;
   temporary->oper_a = 0;
@@ -49,7 +50,8 @@ t_cost  *create_cost()
   p[0] == '-' || p[0] == '+'  ? i++ : 0;
   while (p[i])
      ft_isdigit(p[i]) ? i++ : exit(error());
-  temporary = (t_stack *)malloc(sizeof(t_stack));
+  if (!(temporary = (t_stack *)malloc(sizeof(t_stack))))
+      exit(error());
   temporary->element = ft_atoi(p);
   temporary->i = k;
   temporary->cost = create_cost();
@@ -58,7 +60,38 @@ t_cost  *create_cost()
   return (temporary);
 }
 
-void  create_stack_a(char **argc, t_stacks *s)
+char **arguments(int argv, char **argc)
+{
+  char **p;
+  int i;
+  int k;
+
+  i = 0;
+  k = 1;
+  if (argv == 2)
+  {
+    if (!(p = ft_strsplit(argc[1], ' ')))
+        exit(error());
+  }
+   else
+  {
+    if (!(p = (char **)malloc(sizeof(*p) * argv)))
+      exit(error());
+    p[argv - 1] = NULL;
+    while (argv > 1)
+    {
+      if (!(p[i] = (char *)malloc(sizeof(char) * ft_strlen(argc[k]))))
+        exit(error());
+      ft_strcpy(p[i], argc[k]);
+      i++;
+      k++;
+      argv--;
+    }
+  }
+  return(p);
+}
+
+void  create_stack_a(int argv, char **argc, t_stacks *s)
 {
   t_stack     *temporary;
   char      **p;
@@ -67,8 +100,7 @@ void  create_stack_a(char **argc, t_stacks *s)
 
   i = -1;
   k = 0;
-  if (!(p = ft_strsplit(argc[1], ' ')))
-      exit(error());
+  p = arguments(argv, argc);
   check_duplicates(p, s);
   while(p[++i]) 
   {
@@ -84,7 +116,8 @@ t_stat  *create_statistic()
 {
   t_stat     *temporary;
   
-  temporary = (t_stat *)malloc(sizeof(t_stat));
+  if (!(temporary = (t_stat *)malloc(sizeof(t_stat))))
+    exit(error());
   temporary->i_max = 0;
   temporary->i_min = 0;
   temporary->max = 0;
@@ -92,7 +125,7 @@ t_stat  *create_statistic()
   return (temporary);
 }
 
-t_stacks *create_stacks(char **argc)
+t_stacks *create_stacks(int argv, char **argc)
 {
   t_stacks *s;
 
@@ -105,6 +138,6 @@ t_stacks *create_stacks(char **argc)
   s->top_a = NULL;
   s->top_b = NULL;
   s->stat = create_statistic();
-  create_stack_a(argc, s);
+  create_stack_a(argv, argc, s);
   return(s);
 }

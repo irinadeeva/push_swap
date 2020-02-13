@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:32:11 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/07 16:15:24 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/13 21:03:14 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ void throw_to_stack_a(t_stacks *s, int i)
         indexation(s->b);
 }
 
-void    find_new_begin_top(t_stacks *s)
+/*void    find_new_begin_top(t_stacks *s)
 {
     t_stack *tmp;
     t_stack *tmp2;
@@ -286,6 +286,26 @@ void    find_new_begin_top(t_stacks *s)
             s->a = tmp2;
         tmp2 = tmp2->next;
     }      
+}*/
+
+void    throw_to_begin(t_stacks *s)
+{
+    int middle;
+    int k;
+    
+    middle = s->len_a /2 + 1;
+    min_max(s);
+    if (s->stat->i_min < middle)
+    {
+        while (s->stat->i_min--)
+            ra(s);
+    }
+    else
+    {
+        k = s->len_a - s->stat->i_min;
+        while (k--)
+            rra(s);
+    }
 }
 
 void    cost_of_operation(t_stacks *s)
@@ -318,5 +338,7 @@ void    cost_of_operation(t_stacks *s)
             }   
         }
     }
-    find_new_begin_top(s);
+   // displayStack(s);
+    throw_to_begin(s);
+    //find_new_begin_top(s);
 }
