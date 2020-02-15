@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_checker.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 20:46:35 by bhugo             #+#    #+#             */
-/*   Updated: 2019/11/19 22:03:48 by bhugo            ###   ########.fr       */
+/*   Created: 2020/02/15 14:57:03 by bhugo             #+#    #+#             */
+/*   Updated: 2020/02/15 15:45:22 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_CHECKER_H
+# define FT_CHECKER_H
 
-void	ft_putchar(char c)
+# include "ft_push_swap.h"
+
+# define STDIN 0
+
+typedef struct s_operations
 {
-	write(1, &c, 1);
-}
+    char *commad;
+    struct s_operations *next;
+}               t_operations;
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:55:29 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/04 14:37:12 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/15 18:46:23 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void  sort_3(t_stacks *s)
     x = s->a->element; 
     y = s->a->next->element;
     z = s->a->next->next->element;
-    (x > y && x < z && y < z) ? sa(s) : 0;
-    (x < y && x > z && y > x) ? rra(s) : 0;
-    (x > y && x > z && y < z) ? ra(s) : 0;
+    (x > y && x < z && y < z) ? sa(s, 0) : 0;
+    (x < y && x > z && y > x) ? rra(s, 0) : 0;
+    (x > y && x > z && y < z) ? ra(s, 0) : 0;
     if (x < y && x < z && z < y)
     {
-        sa(s);
-        ra(s);
+        sa(s, 0);
+        ra(s, 0);
     }
     else if (x > y && x > z && y > z)
     {
-        sa(s);
-        rra(s); 
+        sa(s, 0);
+        rra(s, 0); 
     }
 }

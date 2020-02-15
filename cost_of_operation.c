@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:32:11 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/13 21:03:14 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/15 18:44:27 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,51 +218,59 @@ void throw_to_stack_a(t_stacks *s, int i)
     tmp = s->b;
     while (tmp->i != i)
         tmp = tmp->next;
-    /*if (tmp->cost->direction_a == tmp->cost->direction_b)
+    if (tmp->cost->direction_a == tmp->cost->direction_b)
     {
         if (tmp->cost->direction_a == 1)
         {
-            while (tmp->cost->oper_a-- || tmp->cost->oper_b--)
-                rr(s);
+            while (tmp->cost->oper_a != 0 && tmp->cost->oper_b != 0)
+            {
+                rr(s, 0);
+                tmp->cost->oper_a--;
+                tmp->cost->oper_b--;
+            }
             while (tmp->cost->oper_a--)
-                    ra(s);
+                    ra(s, 0);
             while (tmp->cost->oper_b--)
-                    rb(s); 
+                    rb(s, 0); 
         }
         else if (tmp->cost->direction_a == -1)
         {
-           while (tmp->cost->oper_a-- || tmp->cost->oper_b--)
-                rrr(s);
+           while (tmp->cost->oper_a !=0  && tmp->cost->oper_b != 0)
+           {    
+               rrr(s, 0);
+               tmp->cost->oper_a--;
+                tmp->cost->oper_b--;
+           }
             while (tmp->cost->oper_a--)
-                rra(s);        
+                rra(s, 0);        
             while (tmp->cost->oper_b--)
-                rrb(s); 
+                rrb(s, 0); 
         }
     }
-    else*/
+    else
     {
         if (tmp->cost->direction_a == 1)
         {
             while (tmp->cost->oper_a--)
-                    ra(s); 
+                    ra(s, 0); 
         }
         if (tmp->cost->direction_a == -1)
         {
             while (tmp->cost->oper_a--)
-                rra(s); 
+                rra(s, 0); 
         }
         if (tmp->cost->direction_b == 1)
         {
             while (tmp->cost->oper_b--)
-                    rb(s); 
+                    rb(s, 0); 
         }
         if (tmp->cost->direction_b == -1)
         {
             while (tmp->cost->oper_b--)
-                rrb(s); 
+                rrb(s, 0); 
         }
     }
-    pa(s);
+    pa(s, 0);
     s->len_b--;
     indexation(s->a);
     if (s->b != NULL)
@@ -298,13 +306,13 @@ void    throw_to_begin(t_stacks *s)
     if (s->stat->i_min < middle)
     {
         while (s->stat->i_min--)
-            ra(s);
+            ra(s, 0);
     }
     else
     {
         k = s->len_a - s->stat->i_min;
         while (k--)
-            rra(s);
+            rra(s, 0);
     }
 }
 

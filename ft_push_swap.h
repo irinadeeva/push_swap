@@ -48,25 +48,26 @@ t_stacks    *create_stacks(int argv, char **argc);
 void        push(t_stacks *s, t_stack *temporary);
 int         throw_to_stack_b(t_stacks *s);
 
-void    sa(t_stacks *s);
-void    sb(t_stacks *s);
-void    ss(t_stacks *s);
+void    sa(t_stacks *s, int print);
+void    sb(t_stacks *s, int print);
+void    ss(t_stacks *s, int print);
 
-void    ra(t_stacks *s);
-void    rb(t_stacks *s);
-void    rr(t_stacks *s);
+void    ra(t_stacks *s, int print);
+void    rb(t_stacks *s, int print);
+void    rr(t_stacks *s, int print);
 
-void    rra(t_stacks *s);
-void    rrb(t_stacks *s);
-void    rrr(t_stacks *s);
+void    rra(t_stacks *s, int print);
+void    rrb(t_stacks *s, int print);
+void    rrr(t_stacks *s, int print);
 
-void    pb(t_stacks *s);
-void    pa(t_stacks *s);
+void    pb(t_stacks *s, int print);
+void    pa(t_stacks *s, int print);
 
 void    sort_3(t_stacks *s);
 void    cost_of_operation(t_stacks *s);
 void    indexation(t_stack *a);
 void    displayStack(t_stacks *s);
 void    min_max(t_stacks *s);
+int     check_sort(t_stacks *s, int quality);
 
 #endif
