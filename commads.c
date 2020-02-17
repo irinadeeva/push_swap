@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:28:40 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/15 18:46:40 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/17 20:48:22 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void  pa(t_stacks *s, int print)
   t_stack *tmp;
   t_stack *tmp2;
   
+  if (s->b == NULL)
+    return;
   if (s->top_b == s->b)
     {
       tmp = s->a;
@@ -44,20 +46,38 @@ void  pb(t_stacks *s, int print)
 {
   t_stack *tmp;
   
+  if (s->a == NULL)
+    return;
   if (s->top_b == NULL)
     {
       s->top_b = s->a;
       s->b = s->a;
-      s->a = s->a->next;
-      s->top_a->next = s->a;
+      if (s->a != s->top_a)
+      {
+          s->a = s->a->next;
+          s->top_a->next = s->a;
+      }
+      else
+      {
+        s->a = NULL;
+        s->top_a = NULL;
+      }
       s->b->next = NULL;
     }
   else if(s->top_b->next == NULL) 
   {
     tmp = s->b;
     s->b = s->a;
-    s->a = s->a->next;
-    s->top_a->next = s->a;
+    if (s->a != s->top_a)
+    {
+          s->a = s->a->next;
+          s->top_a->next = s->a;
+    }
+    else
+    {
+      s->a = NULL;
+      s->top_a = NULL;
+    }
     s->b->next = tmp;
   }
   if (print == 0)
@@ -68,6 +88,8 @@ void sa(t_stacks *s, int print)
 {
   t_stack *tmp;
 
+  if (s->a == NULL)
+    return;
   tmp = s->a;
   s->a = s->a->next;
   s->top_a->next = s->top_a->next->next;
@@ -81,6 +103,8 @@ void sb(t_stacks *s, int print)
 {
   t_stack *tmp;
 
+  if (s->b == NULL)
+    return;
   tmp = s->b;
   s->b = s->b->next;
   s->top_b->next = s->top_b->next->next;
@@ -101,6 +125,8 @@ void ss(t_stacks *s, int print)
 
 void ra(t_stacks *s, int print)
 {
+  if (s->a == NULL)
+    return;
   s->top_a = s->a;
   s->a = s->a->next;
   if (print == 0)
@@ -109,6 +135,8 @@ void ra(t_stacks *s, int print)
 
 void rb(t_stacks *s, int print)
 {
+  if (s->b == NULL)
+    return;
   s->top_b = s->b;
   s->b = s->b->next;
   if (print == 0)
@@ -127,6 +155,8 @@ void rra(t_stacks *s, int print)
 {
   t_stack *tmp;
 
+  if (s->a == NULL)
+    return;
   tmp = s->a;
   while (tmp->next != s->top_a)
     tmp = tmp->next;
@@ -141,6 +171,8 @@ void rrb(t_stacks *s, int print)
 {
   t_stack *tmp;
 
+  if (s->b == NULL || s->b == s->top_b)
+    return;
   tmp = s->b;
   while (tmp->next != s->top_b)
     tmp = tmp->next;

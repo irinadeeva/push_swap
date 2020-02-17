@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/17 13:14:26 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/17 21:15:02 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void    run_operations(t_operations *operations, t_stacks *s)
     tmp = operations;
     while (tmp != NULL)
     {
+        
         ft_strcmp(tmp->commad, "pa") == 0 ? pa(s, 1) : 0;
         ft_strcmp(tmp->commad, "pb") == 0 ? pb(s, 1) : 0;
         ft_strcmp(tmp->commad, "sa") == 0 ? sa(s, 1) : 0;
@@ -56,6 +57,8 @@ t_operations    *read_commands()
         exit(error());
     if ((i = get_next_line(STDIN, &tmp->commad)) == -1)
         exit(error());
+    if (!tmp->commad)
+        return(NULL);
     check_operations(tmp->commad);
     tmp->next = NULL;
     operations = tmp;
@@ -79,6 +82,24 @@ t_operations    *read_commands()
 }
 
 
+void    free_operations(t_operations *operations)
+{
+    t_operations *tmp;
+    t_operations *tmp2;
+
+    tmp = operations;
+    tmp2 = tmp->next;
+    while (tmp)
+    {
+        free(tmp);
+        tmp = tmp2;
+        if (tmp2->next != NULL)
+            tmp2 = tmp2->next;
+        else
+            tmp2 = NULL;
+    }
+}
+
 int main(int argv, char **argc)
 {
     t_stacks        *s;
@@ -87,17 +108,14 @@ int main(int argv, char **argc)
     if (argv >= 2)
     {
         s = create_stacks(argv, argc);
-        if (check_sort(s, argv - 1) == 1)
-        {
-            write(1, "OK\n", 3);
-            return (1);
-        }
         operations = read_commands();
         run_operations(operations, s);
         if (check_sort(s, argv - 1) == 1)
             write(1, "OK\n", 3);
         else
-             write(1, "KO\n", 3);
+            write(1, "KO\n", 3);
+    free_stacks(s);
+    //free_operations(operations);
     }
     return (1);
 }

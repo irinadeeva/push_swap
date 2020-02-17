@@ -70,5 +70,7 @@ void    indexation(t_stack *a);
 void    displayStack(t_stacks *s);
 void    min_max(t_stacks *s);
 int     check_sort(t_stacks *s, int quality);
+void displayStack(t_stacks *s);
+void  free_stacks(t_stacks *s);
 
 #endif

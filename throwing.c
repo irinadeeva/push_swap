@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:39:47 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/15 18:44:52 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/17 20:39:40 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int check_sort(t_stacks *s, int quality)
   t_stack  *tmp_2;
   int i;
 
+  if (s->a == NULL)
+     return (0);
   i = 1;
   tmp = s->a;
   tmp_2 = tmp->next;
