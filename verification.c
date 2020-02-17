@@ -7,6 +7,26 @@ there are duplicates. => check_duplicates(char **p)
 check_duplicates(char **p) helps to detect cases like "01" or "" as well
 */
 
+void    check_duplicates2(t_stacks *s)
+{
+  t_stack *tmp;
+  t_stack *tmp_2;
+
+  tmp = s->a;
+  tmp_2 = tmp->next;
+  while (tmp_2 != s->a)
+  {
+    tmp = s->a;
+    while (tmp->i < tmp_2->i)
+    {
+      if (tmp->element == tmp_2->element)
+        exit(error());
+      tmp = tmp->next;
+    }
+    tmp_2 = tmp_2->next;
+  }
+}
+
 void  check_duplicates(char **p, t_stacks *s)
 {
   int i;

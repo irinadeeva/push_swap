@@ -45,6 +45,7 @@ t_cost  *create_cost()
   int         i;
 
   i = 0;
+  (ft_strlen(p) == 1 && (p[i] == '-' || p[i] == '+')) ? exit(error()) : 0;
   (ft_strlen(p) > 11) ? exit(error()) : 0;
   (ft_strlen(p) == 10 || (ft_strlen(p) == 11 && (p[i] == '-' || p[i] == '+'))) ? varify_integer(p) : 0;
   p[0] == '-' || p[0] == '+'  ? i++ : 0;
@@ -108,6 +109,7 @@ void  create_stack_a(int argv, char **argc, t_stacks *s)
     k++;
     push(s, temporary);
   }
+
   s->top_a->next = s->a;
   free(p);
 }
@@ -139,5 +141,6 @@ t_stacks *create_stacks(int argv, char **argc)
   s->top_b = NULL;
   s->stat = create_statistic();
   create_stack_a(argv, argc, s);
+  check_duplicates2(s);
   return(s);
 }

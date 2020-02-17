@@ -42,6 +42,7 @@ typedef struct		s_stacks
 }                 t_stacks;
 
 void        check_duplicates(char **p, t_stacks *s);
+void        check_duplicates2(t_stacks *s);
 int         varify_integer(char *p);
 int		    error(void);
 t_stacks    *create_stacks(int argv, char **argc);
