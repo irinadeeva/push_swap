@@ -1,7 +1,8 @@
 #ifndef FT_PUSH_SWAP_H
 # define FT_PUSH_SWAP_H
 
-# include "libft/libft.h"
+//# include "libft/libft.h"
+# include "ft_printf/ft_print.h"
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -72,5 +73,6 @@ void    min_max(t_stacks *s);
 int     check_sort(t_stacks *s, int quality);
 void displayStack(t_stacks *s);
 void  free_stacks(t_stacks *s);
+void min_max(t_stacks *s);
 
 #endif

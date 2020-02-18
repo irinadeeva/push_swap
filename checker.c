@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/17 21:15:02 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:52:01 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int main(int argv, char **argc)
             write(1, "OK\n", 3);
         else
             write(1, "KO\n", 3);
-    free_stacks(s);
+    //free_stacks(s);
     //free_operations(operations);
     }
     return (1);

@@ -4,11 +4,6 @@
 t_stack *begin = NULL;
 t_stack *top = NULL;
 
-int		error(void)
-{
-  write(1, "Error\n", 6);
-	exit(1);
-}
 
 /*void popItem()
 {
@@ -75,33 +70,6 @@ int  look_for_max_sequence(t_stacks *s)
   return(1);
 }*/
 
-void min_max(t_stacks *s)
-{
-	t_stack  *tmp;
-
-  tmp = s->a;
-  s->stat->i_max = tmp->i;
-  s->stat->max = tmp->element;
-  s->stat->i_min = tmp->i;
-	s->stat->min = tmp->element;
-  tmp = tmp->next;
-  while (tmp != s->a)
-  {
-    if (tmp->element > s->stat->max)
-    {
-      s->stat->i_max = tmp->i;
-      s->stat->max = tmp->element;
-    }
-    else if (tmp->element < s->stat->min)
-    {
-      s->stat->i_min = tmp->i;
-	    s->stat->min = tmp->element;
-    }
-    tmp = tmp->next;
-  }
-  //printf("max %d and i %d\n", s->stat->max, s->stat->i_max);
-  //printf("min %d and i %d\n", s->stat->min, s->stat->i_min);
-}
 
 int   main(int argv, char **argc)
 {

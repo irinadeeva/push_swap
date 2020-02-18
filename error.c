@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 15:18:54 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/17 21:02:21 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:49:22 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,32 @@ void displayStack(t_stacks *s)
   }
   free(s->stat);
   free(s);
+}
+
+void min_max(t_stacks *s)
+{
+	t_stack  *tmp;
+
+  tmp = s->a;
+  s->stat->i_max = tmp->i;
+  s->stat->max = tmp->element;
+  s->stat->i_min = tmp->i;
+	s->stat->min = tmp->element;
+  tmp = tmp->next;
+  while (tmp != s->a)
+  {
+    if (tmp->element > s->stat->max)
+    {
+      s->stat->i_max = tmp->i;
+      s->stat->max = tmp->element;
+    }
+    else if (tmp->element < s->stat->min)
+    {
+      s->stat->i_min = tmp->i;
+	    s->stat->min = tmp->element;
+    }
+    tmp = tmp->next;
+  }
+  //printf("max %d and i %d\n", s->stat->max, s->stat->i_max);
+  //printf("min %d and i %d\n", s->stat->min, s->stat->i_min);
 }

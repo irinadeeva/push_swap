@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:28:40 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/17 20:48:22 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/18 17:14:57 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void  pa(t_stacks *s, int print)
     s->a->next = tmp2;
   }
   if (print == 0)
-    printf("pa\n");
+    ft_printf("pa\n");
 }
 
 void  pb(t_stacks *s, int print)
@@ -81,7 +81,7 @@ void  pb(t_stacks *s, int print)
     s->b->next = tmp;
   }
   if (print == 0)
-    printf("pb\n");
+    ft_printf("pb\n");
 }
 
 void sa(t_stacks *s, int print)
@@ -96,7 +96,7 @@ void sa(t_stacks *s, int print)
   tmp->next = s->top_a;
   s->a->next = tmp;
   if (print == 0)
-    printf("sa\n");
+    ft_printf("sa\n");
 }
 
 void sb(t_stacks *s, int print)
@@ -111,7 +111,7 @@ void sb(t_stacks *s, int print)
   tmp->next = s->top_b;
   s->b->next = tmp;
   if (print == 0)
-    printf("sb\n");
+    ft_printf("sb\n");
 }
 
 void ss(t_stacks *s, int print)
@@ -119,7 +119,7 @@ void ss(t_stacks *s, int print)
   sb(s, 0);
   sa(s, 0);
   if (print == 0)
-    printf("ss\n");
+    ft_printf("ss\n");
 }
 
 
@@ -130,7 +130,7 @@ void ra(t_stacks *s, int print)
   s->top_a = s->a;
   s->a = s->a->next;
   if (print == 0)
-    printf("ra\n");
+    ft_printf("ra\n");
 }
 
 void rb(t_stacks *s, int print)
@@ -140,7 +140,7 @@ void rb(t_stacks *s, int print)
   s->top_b = s->b;
   s->b = s->b->next;
   if (print == 0)
-    printf("rb\n");
+    ft_printf("rb\n");
 }
 
 void  rr(t_stacks *s, int print)
@@ -148,7 +148,7 @@ void  rr(t_stacks *s, int print)
   ra(s, 1);
   rb(s, 1);
   if (print == 0)
-    printf("rr\n");
+    ft_printf("rr\n");
 }
 
 void rra(t_stacks *s, int print)
@@ -164,7 +164,7 @@ void rra(t_stacks *s, int print)
   s->top_a = tmp;  
   s->top_a->next = s->a;
   if (print == 0)
-    printf("rra\n");
+    ft_printf("rra\n");
 }
 
 void rrb(t_stacks *s, int print)
@@ -180,7 +180,7 @@ void rrb(t_stacks *s, int print)
   s->top_b = tmp;  
   s->top_b->next = s->b;
   if (print == 0)
-    printf("rrb\n");
+    ft_printf("rrb\n");
 }
 
 void  rrr(t_stacks *s, int print)
@@ -188,5 +188,5 @@ void  rrr(t_stacks *s, int print)
   rrb(s, 1);
   rra(s, 1);
   if (print == 0)
-    printf("rrr\n");
+    ft_printf("rrr\n");
 }

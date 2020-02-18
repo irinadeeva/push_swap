@@ -1,43 +1,60 @@
-NAME = 	push_swap
+NAME1 = push_swap
 
-SRCS = 	push_swap.c \
+NAME2 = checker
+
+SRCS1 = push_swap.c \
 		verification.c\
 		create_stack.c\
 		commads.c\
 		throwing.c\
 		sort_3.c\
 		cost_of_operation.c\
+		error.c
 
-OBJS = 	push_swap.o \
-		verification.o\
-		create_stack.o\
-		commads.o\
-		throwing.o\
-		sort_3.o\
-		cost_of_operation.o\
+OBJS1 = $(SRCS1:.c=.o)
+
+SRCS2 = checker.c \
+		verification.c\
+		create_stack.c\
+		commads.c\
+		throwing.c\
+		sort_3.c\
+		cost_of_operation.c\
+		error.c
+
+OBJS2 = $(SRCS2:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-LIB = make -C libft/
+H_DIR1 = ft_push_swap.h
 
-H_DIR = ft_push_swap.h
+H_DIR2 = ft_checker.h
 
-LIB_DIR = ./libft/
+LIB_DIR = ./ft_printf/
 
-all: $(NAME)
+all: $(NAME1) $(NAME2)
 
-$(NAME):
+$(NAME1):
 	$(LIB)
-	gcc -c $(SRCS) -I $(H_DIR) -I $(LIB_DIR) $(FLAGS)
-	gcc $(OBJS) -o $(NAME) -L $(LIB_DIR) -lft
+	gcc -c $(FLAGS) $(SRCS1) -I $(H_DIR1) -I $(LIB_DIR)
+	gcc $(OBJS1) -o $(NAME1) -L $(LIB_DIR) -lftprintf
 
-clean:
-	rm -f $(OBJS)
+$(NAME2):
+	$(LIB)	
+	gcc -c $(FLAGS) $(SRCS2) -I $(H_DIR2) -I $(LIB_DIR)
+	gcc $(OBJS2) -o $(NAME2) -L $(LIB_DIR) -lftprintf
+
+$(LIB):
+	make -C libft/
 	make clean -C $(LIB_DIR)
 
-fclean:
-	rm -f $(NAME)
-	rm -f $(OBJS)
-	make fclean -C $(LIB_DIR)
+clean:
+	rm -f $(OBJS1)
+	rm -f $(OBJS2)
 
+fclean:
+	rm -f $(OBJS1)
+	rm -f $(NAME1)
+	rm -f $(NAME2)
+	
 re: fclean all
