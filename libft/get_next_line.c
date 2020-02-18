@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffood <ffood@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 14:51:48 by bhugo             #+#    #+#             */
-/*   Updated: 2020/01/27 14:46:36 by ffood            ###   ########.fr       */
+/*   Updated: 2020/02/18 17:56:52 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int			get_next_line(const int fd, char **line)
 
 	if (fd < 0 || fd > 10240 || line == NULL)
 		return (-1);
+	ft_bzero(buff, BUFF_SIZE + 1);
 	while ((read_result = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		buff[read_result] = '\0';

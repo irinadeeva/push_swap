@@ -19,6 +19,7 @@ typedef struct s_stack
 {
     int            element;
     int            i;                  // number of an element
+    int            for_max_seq;
     t_cost         *cost;
     struct s_stack *next;
 }               t_stack;

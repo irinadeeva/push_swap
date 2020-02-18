@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 15:18:54 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/18 15:49:22 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/18 19:32:35 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void displayStack(t_stacks *s)
     
     printf("stack a \t%d " , temporary->element);
     reset();
+    printf("conseq = %d ", temporary->for_max_seq);
     //printf("i = \t%d  cost %d", temporary->i, temporary->_cost);
     yellow();
     temporary = temporary->next;
@@ -43,6 +44,7 @@ void displayStack(t_stacks *s)
     {
       printf("\t%d ", temporary->element);
       reset();
+      printf("conseq = %d ", temporary->for_max_seq);
     // printf("i = \t%d  cost %d", temporary->i, temporary->oper_cost);
       yellow();
       temporary = temporary->next;

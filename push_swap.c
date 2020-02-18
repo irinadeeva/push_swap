@@ -31,7 +31,7 @@ t_stack *top = NULL;
         free(top);
         top = temporary;
     } 
-}
+}*/
 
 void  compare_elements(t_stacks *s, int *max)
 {
@@ -64,28 +64,30 @@ int  look_for_max_sequence(t_stacks *s)
   int      max;
 
   if (s->a == s->top_a) 
-    return (1);
+    return (0);
   max = 1;
   compare_elements(s, &max);
-  return(1);
-}*/
+  displayStack(s);
+    return(max);
+}
 
 
 int   main(int argv, char **argc)
 {
   t_stacks   *s;
+  int  max_sequence;
 
   if (argv >= 2)
   {
     s = create_stacks(argv, argc);
+    printf("\n max %d\n", max_sequence = look_for_max_sequence(s));
     s->len_b = throw_to_stack_b(s);
     //printf("length a %d\n", s->len_a);
     //printf("length b %d\n", s->len_b);
     cost_of_operation(s);
-    //look_for_max_sequence(s);
     //printf("\n");
     //displayStack(s);
-     free_stacks(s);
+    free_stacks(s);
   }
   return(1);
 }

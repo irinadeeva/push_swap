@@ -54,6 +54,7 @@ t_cost  *create_cost()
   if (!(temporary = (t_stack *)malloc(sizeof(t_stack))))
       exit(error());
   temporary->element = ft_atoi(p);
+  temporary->for_max_seq = 0;
   temporary->i = k;
   temporary->cost = create_cost();
   temporary->next = NULL;
@@ -109,7 +110,6 @@ void  create_stack_a(int argv, char **argc, t_stacks *s)
     k++;
     push(s, temporary);
   }
-
   s->top_a->next = s->a;
   free(p);
 }

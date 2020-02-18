@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:28:40 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/18 17:14:57 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/18 19:11:53 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ void sa(t_stacks *s, int print)
 {
   t_stack *tmp;
 
-  if (s->a == NULL)
+  if (s->a == NULL || s->a == s->top_a)
     return;
-  tmp = s->a;
-  s->a = s->a->next;
-  s->top_a->next = s->top_a->next->next;
-  tmp->next = s->top_a;
-  s->a->next = tmp;
+  tmp = s->a->next;
+  s->top_a->next = tmp;
+  s->a->next = tmp->next;
+  tmp->next = s->a;
+  s->a = tmp;
   if (print == 0)
     ft_printf("sa\n");
 }
@@ -103,15 +103,15 @@ void sb(t_stacks *s, int print)
 {
   t_stack *tmp;
 
-  if (s->b == NULL)
+  if (s->b == NULL || s->b == s->top_b)
     return;
-  tmp = s->b;
-  s->b = s->b->next;
-  s->top_b->next = s->top_b->next->next;
-  tmp->next = s->top_b;
-  s->b->next = tmp;
+  tmp = s->b->next;
+  s->top_b->next = tmp;
+  s->b->next = tmp->next;
+  tmp->next = s->b;
+  s->b = tmp;
   if (print == 0)
-    ft_printf("sb\n");
+    ft_printf("sa\n");
 }
 
 void ss(t_stacks *s, int print)

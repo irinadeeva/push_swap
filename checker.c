@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/18 15:52:01 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/18 19:29:57 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void    check_operations(char *str)
         exit(error());
 }
 
-t_operations    *read_commands()
+t_operations    *read_commands(int *k)
 {
     t_operations    *operations;
     t_operations    *tmp;
@@ -55,8 +55,11 @@ t_operations    *read_commands()
 
     if (!(tmp = (t_operations*)malloc(sizeof(t_operations))))
         exit(error());
+    tmp->commad = NULL;
+    tmp->next = NULL;
     if ((i = get_next_line(STDIN, &tmp->commad)) == -1)
         exit(error());
+    *k = *k + 1;
     if (!tmp->commad)
         return(NULL);
     check_operations(tmp->commad);
@@ -73,6 +76,7 @@ t_operations    *read_commands()
             free(tmp2);
             break;
         }
+         *k = *k + 1;
         check_operations(tmp2->commad);
         tmp->next = tmp2;
         tmp = tmp->next;   
@@ -82,21 +86,22 @@ t_operations    *read_commands()
 }
 
 
-void    free_operations(t_operations *operations)
+void    free_operations(t_operations *operations, int *i)
 {
     t_operations *tmp;
     t_operations *tmp2;
 
     tmp = operations;
     tmp2 = tmp->next;
-    while (tmp)
+    while (i)
     {
         free(tmp);
         tmp = tmp2;
-        if (tmp2->next != NULL)
+        if (tmp2 && tmp2->next != NULL)
             tmp2 = tmp2->next;
         else
             tmp2 = NULL;
+        i--;
     }
 }
 
@@ -104,18 +109,21 @@ int main(int argv, char **argc)
 {
     t_stacks        *s;
     t_operations    *operations;
+    int             i;
     
     if (argv >= 2)
     {
+        i = 0;
         s = create_stacks(argv, argc);
-        operations = read_commands();
-        run_operations(operations, s);
+       operations = read_commands(&i);
+    run_operations(operations, s);
         if (check_sort(s, argv - 1) == 1)
             write(1, "OK\n", 3);
         else
             write(1, "KO\n", 3);
-    //free_stacks(s);
-    //free_operations(operations);
+   // free_stacks(s);
+   // printf("%d\n", i);
+   // free_operations(operations, &i);
     }
     return (1);
 }
