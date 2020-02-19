@@ -9,6 +9,7 @@ SRCS1 = push_swap.c \
 		throwing.c\
 		sort_3.c\
 		cost_of_operation.c\
+		get_linked_list.c\
 		error.c
 
 OBJS1 = $(SRCS1:.c=.o)
@@ -20,6 +21,7 @@ SRCS2 = checker.c \
 		throwing.c\
 		sort_3.c\
 		cost_of_operation.c\
+		get_linked_list.c\
 		error.c
 
 OBJS2 = $(SRCS2:.c=.o)

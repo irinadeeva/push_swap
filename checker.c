@@ -6,172 +6,167 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/19 19:04:47 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/19 19:22:42 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_checker.h"
 
-void    run_operations(t_operations *operations, t_stacks *s)
+void			run_operations(t_operations *operations, t_stacks *s)
 {
-    t_operations    *tmp;
+	t_operations	*tmp;
 
-    tmp = operations;
-    while (tmp != NULL)
-    {
-        
-        ft_strcmp(tmp->commad, "pa") == 0 ? pa(s, 1) : 0;
-        ft_strcmp(tmp->commad, "pb") == 0 ? pb(s, 1) : 0;
-        ft_strcmp(tmp->commad, "sa") == 0 ? sa(s, 1) : 0;
-        ft_strcmp(tmp->commad, "sb") == 0 ? sb(s, 1) : 0;
-        ft_strcmp(tmp->commad, "ss") == 0 ? ss(s, 1) : 0;
-        ft_strcmp(tmp->commad, "ra") == 0 ? ra(s, 1) : 0;
-        ft_strcmp(tmp->commad, "rb") == 0 ? rb(s, 1) : 0;
-        ft_strcmp(tmp->commad, "rr") == 0 ? rr(s, 1) : 0;
-        ft_strcmp(tmp->commad, "rra") == 0 ? rra(s, 1) : 0;
-        ft_strcmp(tmp->commad, "rrb") == 0 ? rrb(s, 1) : 0;
-        ft_strcmp(tmp->commad, "rrr") == 0 ? rrr(s, 1) : 0;
-        tmp = tmp->next;
-    }
+	tmp = operations;
+	while (tmp != NULL)
+	{
+		ft_strcmp(tmp->commad, "pa") == 0 ? pa(s, 1) : 0;
+		ft_strcmp(tmp->commad, "pb") == 0 ? pb(s, 1) : 0;
+		ft_strcmp(tmp->commad, "sa") == 0 ? sa(s, 1) : 0;
+		ft_strcmp(tmp->commad, "sb") == 0 ? sb(s, 1) : 0;
+		ft_strcmp(tmp->commad, "ss") == 0 ? ss(s, 1) : 0;
+		ft_strcmp(tmp->commad, "ra") == 0 ? ra(s, 1) : 0;
+		ft_strcmp(tmp->commad, "rb") == 0 ? rb(s, 1) : 0;
+		ft_strcmp(tmp->commad, "rr") == 0 ? rr(s, 1) : 0;
+		ft_strcmp(tmp->commad, "rra") == 0 ? rra(s, 1) : 0;
+		ft_strcmp(tmp->commad, "rrb") == 0 ? rrb(s, 1) : 0;
+		ft_strcmp(tmp->commad, "rrr") == 0 ? rrr(s, 1) : 0;
+		tmp = tmp->next;
+	}
 }
 
-void    check_operations(char *str)
+void			check_operations(char *str)
 {
-    if (ft_strcmp(str, "pa") != 0 && ft_strcmp(str, "pb") != 0 && 
-        ft_strcmp(str, "sa") != 0 && ft_strcmp(str, "sb") != 0 && 
-        ft_strcmp(str, "ss") != 0 && ft_strcmp(str, "rr") != 0 && 
-        ft_strcmp(str, "ra") != 0 && ft_strcmp(str, "rb") != 0 && 
-        ft_strcmp(str, "rra") != 0 && ft_strcmp(str, "rrb") != 0 && 
-        ft_strcmp(str, "rrr") != 0)
-        exit(error());
+	if (ft_strcmp(str, "pa") != 0 && ft_strcmp(str, "pb") != 0 &&
+		ft_strcmp(str, "sa") != 0 && ft_strcmp(str, "sb") != 0 &&
+		ft_strcmp(str, "ss") != 0 && ft_strcmp(str, "rr") != 0 &&
+		ft_strcmp(str, "ra") != 0 && ft_strcmp(str, "rb") != 0 &&
+		ft_strcmp(str, "rra") != 0 && ft_strcmp(str, "rrb") != 0 &&
+		ft_strcmp(str, "rrr") != 0)
+		exit(error());
 }
 
-t_operations    *read_commands(int *k)
+t_operations	*read_commands(int *k)
 {
-    t_operations    *operations;
-    t_operations    *tmp;
-    t_operations    *tmp2;
-    int             i;
+	t_operations	*operations;
+	t_operations	*tmp;
+	t_operations	*tmp2;
+	int				i;
 
-    if (!(tmp = (t_operations*)malloc(sizeof(t_operations))))
-        exit(error());
-    tmp->commad = NULL;
-    tmp->next = NULL;
-    if ((i = get_next_line(STDIN, &tmp->commad)) == -1)
-        exit(error());
-    *k = *k + 1;
-    if (!tmp->commad)
-    {
-        free(tmp);
-        return(NULL);
-    }
-    check_operations(tmp->commad);
-    operations = tmp;
-    while (i > 0)
-    {
-        if (!(tmp2 = (t_operations*)malloc(sizeof(t_operations))))
-            exit(error());
-        if ((i = get_next_line(STDIN, &tmp2->commad)) == -1)
-            exit(error());
-        if (i < 1)
-        {
-            free(tmp2);
-            break;
-        }
-         *k = *k + 1;
-        check_operations(tmp2->commad);
-        tmp->next = tmp2;
-        tmp = tmp->next;   
-        tmp->next = NULL;
-    }
-    return(operations);
+	if (!(tmp = (t_operations*)malloc(sizeof(t_operations))))
+		exit(error());
+	tmp->commad = NULL;
+	tmp->next = NULL;
+	if ((i = get_next_line(STDIN, &tmp->commad)) == -1)
+		exit(error());
+	*k = *k + 1;
+	if (!tmp->commad)
+	{
+		free(tmp);
+		return (NULL);
+	}
+	check_operations(tmp->commad);
+	operations = tmp;
+	while (i > 0)
+	{
+		if (!(tmp2 = (t_operations*)malloc(sizeof(t_operations))))
+			exit(error());
+		if ((i = get_next_line(STDIN, &tmp2->commad)) == -1)
+			exit(error());
+		if (i < 1)
+		{
+			free(tmp2);
+			break ;
+		}
+		*k = *k + 1;
+		check_operations(tmp2->commad);
+		tmp->next = tmp2;
+		tmp = tmp->next;
+		tmp->next = NULL;
+	}
+	return (operations);
 }
 
-
-void    free_operations(t_operations *operations, int i)
+void			free_operations(t_operations *operations, int i)
 {
-    t_operations *tmp;
-    t_operations *tmp2;
+	t_operations	*tmp;
+	t_operations	*tmp2;
 
-    if (operations == NULL)
-    {
-        free(operations);
-        return;
-    }
-    tmp = operations;
-    tmp2 = tmp->next;
-    while (i)
-    {
-        free(tmp->commad);
-        free(tmp);
-        tmp = tmp2;
-        if (tmp2 && tmp2->next != NULL)
-            tmp2 = tmp2->next;
-        else
-            tmp2 = NULL;
-        i--;
-    }
+	if (operations == NULL)
+	{
+		free(operations);
+		return ;
+	}
+	tmp = operations;
+	tmp2 = tmp->next;
+	while (i)
+	{
+		free(tmp->commad);
+		free(tmp);
+		tmp = tmp2;
+		if (tmp2 && tmp2->next != NULL)
+			tmp2 = tmp2->next;
+		else
+			tmp2 = NULL;
+		i--;
+	}
 }
 
-
-void free_a(t_stack *a, t_stack *top_a)
+void			free_a(t_stack *a, t_stack *top_a)
 {
-    t_stack *tmp;
-    t_stack *tmp2;
-    int     i;
+	t_stack			*tmp;
+	t_stack			*tmp2;
+	int				i;
 
-    if (a == NULL)
-        return ;
-    i = 1;
-    tmp = a;
-    while (tmp != top_a)
-    {
-        if (tmp->next == NULL)
-            tmp = NULL;
-        else
-            tmp = tmp->next;
-        i++;
-    }
-    tmp = a;
-    tmp2 = tmp->next;
-    while (i--)
-    {
-        free(tmp);
-        free(tmp->cost);
-        tmp = tmp2;
-        if (tmp2 != NULL)
-            tmp2 = tmp->next;
-
-   }
+	if (a == NULL)
+		return ;
+	i = 1;
+	tmp = a;
+	while (tmp != top_a)
+	{
+		if (tmp->next == NULL)
+			tmp = NULL;
+		else
+			tmp = tmp->next;
+		i++;
+	}
+	tmp = a;
+	tmp2 = tmp->next;
+	while (i--)
+	{
+		free(tmp);
+		free(tmp->cost);
+		tmp = tmp2;
+		if (tmp2 != NULL)
+			tmp2 = tmp->next;
+	}
 }
 
-void    free_stacks(t_stacks *s)
+void			free_stacks(t_stacks *s)
 {
-  free_a(s->a, s->top_a);
-  free_a(s->b, s->top_b);
-  free(s->stat);
-  free(s);
+	free_a(s->a, s->top_a);
+	free_a(s->b, s->top_b);
+	free(s->stat);
+	free(s);
 }
 
-int main(int argv, char **argc)
+int				main(int argv, char **argc)
 {
-    t_stacks        *s;
-    t_operations    *operations;
-    int             i;
-    
-    if (argv >= 2)
-    {
-        i = 0;
-        s = create_stacks(argv, argc);
-        operations = read_commands(&i);
-        run_operations(operations, s);
-        if (check_sort(s, argv - 1) == 1)
-            write(1, "OK\n", 3);
-        else
-            write(1, "KO\n", 3);
-        //exit(1);
-        free_stacks(s);
-        free_operations(operations, i);
-    }
-    return (1);
+	t_stacks		*s;
+	t_operations	*operations;
+	int				i;
+
+	if (argv >= 2)
+	{
+		i = 0;
+		s = create_stacks(argv, argc);
+		operations = read_commands(&i);
+		run_operations(operations, s);
+		if (check_sort(s, argv - 1) == 1)
+			write(1, "OK\n", 3);
+		else
+			write(1, "KO\n", 3);
+		free_stacks(s);
+		free_operations(operations, i);
+	}
+	return (1);
 }

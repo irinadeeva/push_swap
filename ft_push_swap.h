@@ -48,6 +48,7 @@ void        check_duplicates2(t_stacks *s);
 int         varify_integer(char *p);
 int		    error(void);
 t_stacks    *create_stacks(int argv, char **argc);
+t_cost  *create_cost();
 void        push(t_stacks *s, t_stack *temporary);
 int         throw_to_stack_b(t_stacks *s);
 
@@ -75,5 +76,11 @@ int     check_sort(t_stacks *s, int quality);
 void displayStack(t_stacks *s);
 void  free_stack(t_stacks *s);
 void min_max(t_stacks *s);
+
+void push(t_stacks *s, t_stack *temporary);
+t_stack    *getlist(char *p, int k);
+char **arguments(int argv, char **argc);
+
+
 
 #endif

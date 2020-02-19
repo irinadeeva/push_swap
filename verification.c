@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   verification.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhugo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:49:10 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/19 13:54:25 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/19 19:45:09 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-/* check the data:
-some arguments aren’t integers,
-some arguments are bigger or smaller than an integer => varify_integer(char *p)
-there are duplicates. => check_duplicates(char **p)
-check_duplicates(char **p) helps to detect cases like "01" or "" as well
+/* 
+** check the data:
+** some arguments aren’t integers,
+** some arguments are bigger or smaller than an integer => varify_integer(char *p)
+** there are duplicates. => check_duplicates(char **p), check_duplicates2(t_stacks *s)
+** check_duplicates(char **p) helps to detect cases like "01" or "" as well
 */
 
 void	check_duplicates2(t_stacks *s)

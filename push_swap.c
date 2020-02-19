@@ -1,38 +1,6 @@
 
 #include "ft_push_swap.h"
 
-t_stack *begin = NULL;
-t_stack *top = NULL;
-
-
-/*void popItem()
-{
- t_stack *temporary;
-  
-    if (top == NULL)
-    {
-        printf("\nStack is Exhausted");
-        return;
-    }
-    temporary = begin;
-    if (begin -> next == NULL)
-    {
-        printf("\nPopped Element is: %d ", top -> element);
-        begin = NULL;
-        free(top);
-        top = NULL;
-    }
-    else 
-    {   
-        while(temporary -> next != top)
-            temporary = temporary -> next;
-        temporary -> next = NULL;
-        printf("\n Popped Element is: %d ", top -> element);
-        free(top);
-        top = temporary;
-    } 
-}*/
-
 void  compare_elements(t_stacks *s, int *max)
 {
   t_stack  *tmp;
@@ -78,7 +46,7 @@ int   main(int argv, char **argc)
   t_stacks   *s;
   //int  max_sequence;
 
-  if (argv >= 2)
+  if (argv > 1)
   {
     s = create_stacks(argv, argc);
    // printf("\n max %d\n", max_sequence = look_for_max_sequence(s));
