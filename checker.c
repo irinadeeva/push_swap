@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/18 19:29:57 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/19 19:04:47 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ t_operations    *read_commands(int *k)
         exit(error());
     *k = *k + 1;
     if (!tmp->commad)
+    {
+        free(tmp);
         return(NULL);
+    }
     check_operations(tmp->commad);
-    tmp->next = NULL;
     operations = tmp;
     while (i > 0)
     {
@@ -86,15 +88,21 @@ t_operations    *read_commands(int *k)
 }
 
 
-void    free_operations(t_operations *operations, int *i)
+void    free_operations(t_operations *operations, int i)
 {
     t_operations *tmp;
     t_operations *tmp2;
 
+    if (operations == NULL)
+    {
+        free(operations);
+        return;
+    }
     tmp = operations;
     tmp2 = tmp->next;
     while (i)
     {
+        free(tmp->commad);
         free(tmp);
         tmp = tmp2;
         if (tmp2 && tmp2->next != NULL)
@@ -103,6 +111,46 @@ void    free_operations(t_operations *operations, int *i)
             tmp2 = NULL;
         i--;
     }
+}
+
+
+void free_a(t_stack *a, t_stack *top_a)
+{
+    t_stack *tmp;
+    t_stack *tmp2;
+    int     i;
+
+    if (a == NULL)
+        return ;
+    i = 1;
+    tmp = a;
+    while (tmp != top_a)
+    {
+        if (tmp->next == NULL)
+            tmp = NULL;
+        else
+            tmp = tmp->next;
+        i++;
+    }
+    tmp = a;
+    tmp2 = tmp->next;
+    while (i--)
+    {
+        free(tmp);
+        free(tmp->cost);
+        tmp = tmp2;
+        if (tmp2 != NULL)
+            tmp2 = tmp->next;
+
+   }
+}
+
+void    free_stacks(t_stacks *s)
+{
+  free_a(s->a, s->top_a);
+  free_a(s->b, s->top_b);
+  free(s->stat);
+  free(s);
 }
 
 int main(int argv, char **argc)
@@ -115,15 +163,15 @@ int main(int argv, char **argc)
     {
         i = 0;
         s = create_stacks(argv, argc);
-       operations = read_commands(&i);
-    run_operations(operations, s);
+        operations = read_commands(&i);
+        run_operations(operations, s);
         if (check_sort(s, argv - 1) == 1)
             write(1, "OK\n", 3);
         else
             write(1, "KO\n", 3);
-   // free_stacks(s);
-   // printf("%d\n", i);
-   // free_operations(operations, &i);
+        //exit(1);
+        free_stacks(s);
+        free_operations(operations, i);
     }
     return (1);
 }

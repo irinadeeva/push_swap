@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:39:47 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/18 19:47:07 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:43:54 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int  throw_to_stack_b(t_stacks *s)
   int quality;
   
   quality = s->len_a;
-  //printf("sort: %d\n", check_sort(s, quality));
   tmp = s->a;
   while (quality > 3 && check_sort(s, quality) == 0)
   {

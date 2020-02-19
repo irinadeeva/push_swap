@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 15:18:54 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/18 19:32:35 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/19 16:56:03 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void displayStack(t_stacks *s)
       printf("\n stack b empty");
  }
 
- void  free_stacks(t_stacks *s)
+ void  free_stack(t_stacks *s)
 {
   t_stack *tmp;
   t_stack *tmp2;

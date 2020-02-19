@@ -68,6 +68,7 @@ int  look_for_max_sequence(t_stacks *s)
   max = 1;
   compare_elements(s, &max);
   displayStack(s);
+  
     return(max);
 }
 
@@ -75,19 +76,15 @@ int  look_for_max_sequence(t_stacks *s)
 int   main(int argv, char **argc)
 {
   t_stacks   *s;
-  int  max_sequence;
+  //int  max_sequence;
 
   if (argv >= 2)
   {
     s = create_stacks(argv, argc);
-    printf("\n max %d\n", max_sequence = look_for_max_sequence(s));
+   // printf("\n max %d\n", max_sequence = look_for_max_sequence(s));
     s->len_b = throw_to_stack_b(s);
-    //printf("length a %d\n", s->len_a);
-    //printf("length b %d\n", s->len_b);
     cost_of_operation(s);
-    //printf("\n");
-    //displayStack(s);
-    free_stacks(s);
+    free_stack(s);
   }
   return(1);
 }
