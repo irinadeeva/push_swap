@@ -6,17 +6,17 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:49:10 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/19 19:45:09 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/20 13:56:46 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-/* 
+/*
 ** check the data:
-** some arguments aren’t integers,
-** some arguments are bigger or smaller than an integer => varify_integer(char *p)
-** there are duplicates. => check_duplicates(char **p), check_duplicates2(t_stacks *s)
+** arguments aren’t integers,
+** arguments are bigger or smaller than an integer => varify_integer(char *p)
+** there are duplicates =>check_duplicates, check_duplicates2
 ** check_duplicates(char **p) helps to detect cases like "01" or "" as well
 */
 
@@ -40,9 +40,8 @@ void	check_duplicates2(t_stacks *s)
 	}
 }
 
-void	check_duplicates(char **p, t_stacks *s)
+void	check_duplicates(char **p, t_stacks *s, int i)
 {
-	int		i;
 	int		k;
 	int		len;
 
@@ -51,7 +50,6 @@ void	check_duplicates(char **p, t_stacks *s)
 	((len = s->len_a) == 0) ? exit(error()) : 0;
 	if (len == 1)
 	{
-		i = 0;
 		p[0][i] == '-' || p[0][i] == '+' ? i++ : 0;
 		p[0][i] == '0' && p[0][++i] != '\0' ? exit(error()) : 0;
 	}

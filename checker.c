@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/19 19:22:42 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/20 15:50:39 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,110 +43,6 @@ void			check_operations(char *str)
 		ft_strcmp(str, "rra") != 0 && ft_strcmp(str, "rrb") != 0 &&
 		ft_strcmp(str, "rrr") != 0)
 		exit(error());
-}
-
-t_operations	*read_commands(int *k)
-{
-	t_operations	*operations;
-	t_operations	*tmp;
-	t_operations	*tmp2;
-	int				i;
-
-	if (!(tmp = (t_operations*)malloc(sizeof(t_operations))))
-		exit(error());
-	tmp->commad = NULL;
-	tmp->next = NULL;
-	if ((i = get_next_line(STDIN, &tmp->commad)) == -1)
-		exit(error());
-	*k = *k + 1;
-	if (!tmp->commad)
-	{
-		free(tmp);
-		return (NULL);
-	}
-	check_operations(tmp->commad);
-	operations = tmp;
-	while (i > 0)
-	{
-		if (!(tmp2 = (t_operations*)malloc(sizeof(t_operations))))
-			exit(error());
-		if ((i = get_next_line(STDIN, &tmp2->commad)) == -1)
-			exit(error());
-		if (i < 1)
-		{
-			free(tmp2);
-			break ;
-		}
-		*k = *k + 1;
-		check_operations(tmp2->commad);
-		tmp->next = tmp2;
-		tmp = tmp->next;
-		tmp->next = NULL;
-	}
-	return (operations);
-}
-
-void			free_operations(t_operations *operations, int i)
-{
-	t_operations	*tmp;
-	t_operations	*tmp2;
-
-	if (operations == NULL)
-	{
-		free(operations);
-		return ;
-	}
-	tmp = operations;
-	tmp2 = tmp->next;
-	while (i)
-	{
-		free(tmp->commad);
-		free(tmp);
-		tmp = tmp2;
-		if (tmp2 && tmp2->next != NULL)
-			tmp2 = tmp2->next;
-		else
-			tmp2 = NULL;
-		i--;
-	}
-}
-
-void			free_a(t_stack *a, t_stack *top_a)
-{
-	t_stack			*tmp;
-	t_stack			*tmp2;
-	int				i;
-
-	if (a == NULL)
-		return ;
-	i = 1;
-	tmp = a;
-	while (tmp != top_a)
-	{
-		if (tmp->next == NULL)
-			tmp = NULL;
-		else
-			tmp = tmp->next;
-		i++;
-	}
-	tmp = a;
-	tmp2 = tmp->next;
-	while (i--)
-	{
-		free(tmp);
-		free(tmp->cost);
-		tmp = tmp2;
-		if (tmp2 != NULL)
-			tmp2 = tmp->next;
-	}
-}
-
-void			free_stacks(t_stacks *s)
-{
-	free_a(s->a, s->top_a);
-	free_a(s->b, s->top_b);
-	free(s->stat);
-	free(s);
 }
 
 int				main(int argv, char **argc)

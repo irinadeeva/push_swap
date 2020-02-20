@@ -5,11 +5,16 @@ NAME2 = checker
 SRCS1 = push_swap.c \
 		verification.c\
 		create_stack.c\
-		commads.c\
-		throwing.c\
+		get_linked_list.c\
+		commads_ab.c\
+		commads_a.c\
+		commads_b.c\
+		throwing_to_a.c\
+		throwing_to_b.c\
+		cost_in_a.c\
+		cost_in_b.c\
 		sort_3.c\
 		cost_of_operation.c\
-		get_linked_list.c\
 		error.c
 
 OBJS1 = $(SRCS1:.c=.o)
@@ -17,12 +22,16 @@ OBJS1 = $(SRCS1:.c=.o)
 SRCS2 = checker.c \
 		verification.c\
 		create_stack.c\
-		commads.c\
-		throwing.c\
+		commads_ab.c\
+		commads_a.c\
+		commads_b.c\
+		throwing_to_a.c\
+		throwing_to_b.c\
 		sort_3.c\
-		cost_of_operation.c\
 		get_linked_list.c\
-		error.c
+		scan.c\
+		error.c\
+		free.c
 
 OBJS2 = $(SRCS2:.c=.o)
 
