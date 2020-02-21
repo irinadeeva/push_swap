@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bhugo <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 18:25:19 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/20 18:25:24 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/21 13:44:55 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ typedef struct		s_stacks
 	int				len_b;
 }					t_stacks;
 
+typedef struct		s_algoth
+{
+	int				element;
+	int				len;
+	int				middle_a;
+	int				k;
+	int				len2;
+	t_stack			*tmp;
+	t_stack			*tmp2;
+	t_stack			*tmp3;
+}					t_algoth;
+
 void				check_duplicates(char **p, t_stacks *s, int i);
 void				check_duplicates2(t_stacks *s);
 int					varify_integer(char *p);
@@ -100,5 +112,7 @@ void				cost_in_b(t_stacks *s, int k);
 void				cost_in_a(t_stacks *s);
 void				cost_for_max(t_stacks *s, int middle_a, t_stack *tmp3);
 void				cost_for_min(t_stacks *s, int middle_a, t_stack *tmp3);
+int					extreme_cases(int element, int middle_a,
+		t_stack *tmp3, t_stacks *s);
 
 #endif

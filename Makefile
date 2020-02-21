@@ -13,6 +13,7 @@ SRCS1 = push_swap.c \
 		throwing_to_b.c\
 		cost_in_a.c\
 		cost_in_b.c\
+		cost_extreme_cases.c\
 		sort_3.c\
 		cost_of_operation.c\
 		error.c
