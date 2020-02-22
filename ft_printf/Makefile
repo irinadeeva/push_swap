@@ -76,7 +76,7 @@ OBJS = 	ft_printf.o \
 
 FLAGS = -Wall -Wextra -Werror
 
-LIB = make -C libft/
+LIB = make -C ../libft/
 
 HEADER = ft_printf.h
 

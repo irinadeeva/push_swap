@@ -2,6 +2,8 @@ NAME1 = push_swap
 
 NAME2 = checker
 
+LIB = libftprintf.a
+
 SRCS1 = push_swap.c \
 		verification.c\
 		create_stack.c\
@@ -42,31 +44,35 @@ H_DIR1 = ft_push_swap.h
 
 H_DIR2 = ft_checker.h
 
-LIB_DIR = ./ft_printf/
+LIB_DIR =  ./ft_printf/
 
-all: $(NAME1) $(NAME2)
+all: $(LIB) $(NAME1) $(NAME2)
+
+$(LIB):
+	make -C libft/ 
+	make -C libft/ clean
+	make -C ft_printf/ 
+	make -C ft_printf/ clean
 
 $(NAME1):
-	$(LIB)
 	gcc -c $(FLAGS) $(SRCS1) -I $(H_DIR1) -I $(LIB_DIR)
 	gcc $(OBJS1) -o $(NAME1) -L $(LIB_DIR) -lftprintf
 
 $(NAME2):
-	$(LIB)	
 	gcc -c $(FLAGS) $(SRCS2) -I $(H_DIR2) -I $(LIB_DIR)
 	gcc $(OBJS2) -o $(NAME2) -L $(LIB_DIR) -lftprintf
-
-$(LIB):
-	make -C libft/
-	make clean -C $(LIB_DIR)
 
 clean:
 	rm -f $(OBJS1)
 	rm -f $(OBJS2)
+	make -C libft/ fclean
+	make -C ft_printf/ fclean
 
 fclean:
 	rm -f $(OBJS1)
 	rm -f $(NAME1)
 	rm -f $(NAME2)
-	
+	make -C libft/ fclean
+	make -C ft_printf/ fclean
+
 re: fclean all

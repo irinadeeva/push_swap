@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 14:11:40 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/20 14:25:11 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/22 18:44:47 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@ void	first_node(t_stacks *s)
 {
 	s->top_b = s->a;
 	s->b = s->a;
-	if (s->a != s->top_a)
-	{
-		s->a = s->a->next;
-		s->top_a->next = s->a;
-	}
-	else
+	if (s->a == s->top_a)
 	{
 		s->a = NULL;
 		s->top_a = NULL;
 	}
-	s->b->next = NULL;
+	else
+	{
+		s->a = s->a->next;
+		s->top_a->next = s->a;
+	}
+	s->b->next = s->b;
+	s->top_b->next = s->b;
 }
 
 void	pb(t_stacks *s, int print)
@@ -35,21 +36,21 @@ void	pb(t_stacks *s, int print)
 
 	if (s->a == NULL)
 		return ;
-	if (s->top_b == NULL)
+	else if (s->b == NULL)
 		first_node(s);
-	else if (s->top_b->next == NULL)
+	else if (s->b != NULL)
 	{
 		tmp = s->b;
 		s->b = s->a;
-		if (s->a != s->top_a)
-		{
-			s->a = s->a->next;
-			s->top_a->next = s->a;
-		}
-		else
+		if (s->a == s->top_a)
 		{
 			s->a = NULL;
 			s->top_a = NULL;
+		}
+		else
+		{
+			s->a = s->a->next;
+			s->top_a->next = s->a;
 		}
 		s->b->next = tmp;
 	}
@@ -62,6 +63,17 @@ void	sb(t_stacks *s, int print)
 
 	if (s->b == NULL || s->b == s->top_b)
 		return ;
+	else if (s->b->next == s->top_b)
+	{
+		tmp = s->b;
+		s->b = s->top_b;
+		s->top_b = tmp;
+		s->b->next = s->top_b;
+		s->top_b->next = s->b;
+		if (print == 0)
+			ft_printf("sb\n");
+		return ;
+	}
 	tmp = s->b->next;
 	s->top_b->next = tmp;
 	s->b->next = tmp->next;
@@ -73,7 +85,7 @@ void	sb(t_stacks *s, int print)
 
 void	rb(t_stacks *s, int print)
 {
-	if (s->b == NULL)
+	if (s->b == NULL || s->b == s->top_b)
 		return ;
 	s->top_b = s->b;
 	s->b = s->b->next;

@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/20 15:50:39 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/22 19:03:28 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int				main(int argv, char **argc)
 		s = create_stacks(argv, argc);
 		operations = read_commands(&i);
 		run_operations(operations, s);
-		if (check_sort(s, argv - 1) == 1)
+		if (s->b == NULL && check_sort(s, s->len_a) == 1)
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);

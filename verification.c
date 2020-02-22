@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 13:49:10 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/20 13:56:46 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/22 18:48:44 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,13 @@ void	check_duplicates(char **p, t_stacks *s, int i)
 		s->len_a++;
 	((len = s->len_a) == 0) ? exit(error()) : 0;
 	if (len == 1)
-	{
 		p[0][i] == '-' || p[0][i] == '+' ? i++ : 0;
-		p[0][i] == '0' && p[0][++i] != '\0' ? exit(error()) : 0;
-	}
 	while (--len)
 	{
 		i = 0;
 		k = len;
 		while (i < k)
 		{
-			(p[k][0] == '0' && p[k][1] != '\0') ? exit(error()) : 0;
 			if (ft_strlen(p[i]) == ft_strlen(p[k]))
 				ft_strcmp(p[i], p[k]) == 0 ? exit(error()) : i++;
 			else
