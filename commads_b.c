@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 14:11:40 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/22 18:44:47 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/24 14:26:47 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	pb(t_stacks *s, int print)
 			s->a = s->a->next;
 			s->top_a->next = s->a;
 		}
+		s->top_b->next = s->b;
 		s->b->next = tmp;
 	}
 	(print == 0) ? ft_printf("pb\n") : 0;

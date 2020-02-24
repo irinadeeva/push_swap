@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 13:34:26 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/21 13:37:03 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/24 19:23:50 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	cost_for_max(t_stacks *s, int middle_a, t_stack *tmp3)
 	}
 	else
 	{
-		tmp3->cost->oper_a = s->top_a->i - s->stat->i_max + 1;
+		tmp3->cost->oper_a = s->top_a->i - s->stat->i_max;
 		tmp3->cost->direction_a = -1;
 	}
 }

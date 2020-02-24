@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 14:07:48 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/22 19:04:31 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/24 14:49:00 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	pa(t_stacks *s, int print)
 			s->b = s->b->next;
 			s->top_b->next = s->b;
 		}
-		s->a->next = tmp;
 		s->top_a->next = s->a;
+		s->a->next = tmp;
 	}
 	(print == 0) ? ft_printf("pa\n") : 0;
 }

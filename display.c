@@ -1,15 +1,5 @@
 #include "ft_push_swap.h"
 
-void yellow()
-{
-  printf("\033[1;33m");
-}
-
-void reset () 
-{
-  printf("\033[0m");
-}
-
 void display_stack(t_stacks *s)
 {
   t_stack *temporary;
@@ -17,35 +7,35 @@ void display_stack(t_stacks *s)
     if (s->a != NULL)
     {
       temporary = s->a;
-      printf("stack a \t%d " , temporary->element);
+      ft_printf("\nstack a \t%d " , temporary->element);
       if (temporary && temporary->next)
           temporary = temporary->next;
-      while(temporary != s->a)
+      while (temporary != s->top_a)
       {
-        printf("\t%d ", temporary->element);
-        reset();
-        yellow();
-        temporary = temporary->next;
+        ft_printf("\t%d ", temporary->element);
+        if (temporary && temporary->next)
+            temporary = temporary->next;
       }
+      if (s->top_a != s->a)
+        ft_printf("\t%d ",s->top_a->element);
     }
     if (s->b != NULL)
     {
       temporary = s->b;
-      printf("\nstack b \n\t%3d ", temporary->element);
-      reset();
-      yellow();
-      if (temporary->next != NULL)
+      ft_printf("\nstack b \t%d ", temporary->element);
+      if (temporary && temporary->next)
           temporary = temporary->next;
-      while(temporary != s->b)
+      while (temporary != s->top_b)
       {
-        printf("\t%d ", temporary->element);
-        reset();
-        yellow();
-        if (temporary->next != NULL)
+        ft_printf("\t%d ", temporary->element);
+        if (temporary && temporary->next)
           temporary = temporary->next;
       }
+      if (s->top_b != s->b)
+        ft_printf("\t%d ", s->top_b->element);
+      write(1, "\n", 1);
     }
     else 
-      printf("\nstack b empty\n");
+      ft_printf("\nstack b empty\n");
  }
 

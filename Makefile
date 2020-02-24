@@ -18,7 +18,8 @@ SRCS1 = push_swap.c \
 		cost_extreme_cases.c\
 		sort_3.c\
 		cost_of_operation.c\
-		error.c
+		error.c\
+		display.c
 
 OBJS1 = $(SRCS1:.c=.o)
 
@@ -34,7 +35,8 @@ SRCS2 = checker.c \
 		get_linked_list.c\
 		scan.c\
 		error.c\
-		free.c
+		free.c\
+		display.c
 
 OBJS2 = $(SRCS2:.c=.o)
 

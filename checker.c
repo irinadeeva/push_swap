@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 16:31:38 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/22 19:03:28 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/24 19:28:59 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void			run_operations(t_operations *operations, t_stacks *s)
 	tmp = operations;
 	while (tmp != NULL)
 	{
+		//display_stack(s);
 		ft_strcmp(tmp->commad, "pa") == 0 ? pa(s, 1) : 0;
 		ft_strcmp(tmp->commad, "pb") == 0 ? pb(s, 1) : 0;
 		ft_strcmp(tmp->commad, "sa") == 0 ? sa(s, 1) : 0;
@@ -61,6 +62,7 @@ int				main(int argv, char **argc)
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);
+		//display_stack(s);
 		free_stacks(s);
 		free_operations(operations, i);
 	}

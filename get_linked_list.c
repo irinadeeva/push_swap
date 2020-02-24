@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 19:48:24 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/20 16:06:06 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/24 19:56:12 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_stack	*getlist(char *p, int k)
 	int		i;
 
 	i = 0;
+
 	(ft_strlen(p) == 1 && (p[i] == '-' || p[i] == '+')) ? exit(error()) : 0;
 	(ft_strlen(p) > 11) ? exit(error()) : 0;
 	(ft_strlen(p) == 10 || (ft_strlen(p) == 11 &&

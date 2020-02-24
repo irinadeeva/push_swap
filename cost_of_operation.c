@@ -6,7 +6,7 @@
 /*   By: bhugo <bhugo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 17:32:11 by bhugo             #+#    #+#             */
-/*   Updated: 2020/02/20 17:45:00 by bhugo            ###   ########.fr       */
+/*   Updated: 2020/02/24 19:15:08 by bhugo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,11 @@ void	clean_costs(t_stack *tmp)
 	tmp->cost->oper_b = 0;
 }
 
-void	cost_of_operation(t_stacks *s)
+void	clean_stacks(t_stacks *s)
 {
-	int		i;
-	int		k;
 	t_stack	*tmp;
-
-	i = s->len_b;
-	k = 0;
-	while (i--)
-	{
-		min_max(s);
-		cost_in_b(s, k);
-		cost_in_a(s);
-		throw_to_stack_a(s, find_min_cost(s, k));
-		if (s->b != NULL)
+	
+	if (s->b != NULL)
 		{
 			clean_costs(s->b);
 			tmp = s->b->next;
@@ -124,6 +114,32 @@ void	cost_of_operation(t_stacks *s)
 				tmp = tmp->next;
 			}
 		}
+	if (s->a != NULL)
+		{
+			clean_costs(s->a);
+			tmp = s->a->next;
+			while (tmp != s->a)
+			{
+				clean_costs(tmp);
+				tmp = tmp->next;
+			}
+		}
+}
+
+void	cost_of_operation(t_stacks *s)
+{
+	int		i;
+	int		k;
+
+	i = s->len_b;
+	k = 0;
+	while (i--)
+	{
+		min_max(s);
+		cost_in_b(s, k);
+		cost_in_a(s);
+		throw_to_stack_a(s, find_min_cost(s, k));
+		clean_stacks(s);
 	}
 	throw_to_begin(s);
 }
