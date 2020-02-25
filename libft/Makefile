@@ -89,13 +89,13 @@ OBJECTS = ft_memset.o ft_bzero.o ft_memcpy.o ft_strlen.o ft_strcpy.o ft_strdup.o
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror -c $(SOURCES) -I $(HEADER)
-	ar rcs $(NAME) $(OBJECTS)
+	@gcc -Wall -Wextra -Werror -c $(SOURCES) -I $(HEADER)
+	@ar rcs $(NAME) $(OBJECTS)
 
 clean:
-		/bin/rm -f $(OBJECTS)
+		@/bin/rm -f $(OBJECTS)
 
 fclean: clean
-		/bin/rm -f $(NAME)
+		@/bin/rm -f $(NAME)
 
 re: fclean all

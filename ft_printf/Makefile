@@ -89,16 +89,16 @@ $(NAME):
 	@make -C $(LIB_DIR)
 	@cp $(LIB_DIR)$(LIBFT_A) .
 	@mv $(LIBFT_A) $(NAME)
-	gcc -c $(FLAGS) $(SRCS) -I $(HEADER) -I $(LIB_DIR) 
-	ar rcs $(NAME) $(OBJS)
+	@gcc -c $(FLAGS) $(SRCS) -I $(HEADER) -I $(LIB_DIR)
+	@ar rcs $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJS)
-	make clean -C $(LIB_DIR)
+	@rm -f $(OBJS)
+	@make clean -C $(LIB_DIR)
 
 fclean:
-	rm -f $(NAME)
-	rm -f $(OBJS)
-	make fclean -C $(LIB_DIR)
+	@rm -f $(NAME)
+	@rm -f $(OBJS)
+	@make fclean -C $(LIB_DIR)
 
 re: fclean all

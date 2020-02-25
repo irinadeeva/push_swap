@@ -21,8 +21,6 @@ SRCS1 = push_swap.c \
 		error.c\
 		display.c
 
-OBJS1 = $(SRCS1:.c=.o)
-
 SRCS2 = checker.c \
 		verification.c\
 		create_stack.c\
@@ -38,7 +36,12 @@ SRCS2 = checker.c \
 		free.c\
 		display.c
 
-OBJS2 = $(SRCS2:.c=.o)
+
+DIR_O = obj/
+
+OBJS1 = $(addprefix $(DIR_O),$(SRCS1:.c=.o))
+
+OBJS2 = $(addprefix $(DIR_O),$(SRCS2:.c=.o))
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -48,33 +51,35 @@ H_DIR2 = ft_checker.h
 
 LIB_DIR =  ./ft_printf/
 
+.PHONY: all clean fclean re
+
 all: $(LIB) $(NAME1) $(NAME2)
 
 $(LIB):
-	make -C libft/ 
-	make -C libft/ clean
-	make -C ft_printf/ 
-	make -C ft_printf/ clean
+	@make -C libft/
+	@make -C ft_printf/
 
-$(NAME1):
+$(NAME1): $(OBJS1)
 	gcc -c $(FLAGS) $(SRCS1) -I $(H_DIR1) -I $(LIB_DIR)
 	gcc $(OBJS1) -o $(NAME1) -L $(LIB_DIR) -lftprintf
 
-$(NAME2):
+$(DIR_O)%.o: $(DIR_S)%.c
+	@mkdir -p $(DIR_O)
+	$(CC) $(FLAGS) -o $@ -c $<
+
+$(NAME2): $(OBJS2)
 	gcc -c $(FLAGS) $(SRCS2) -I $(H_DIR2) -I $(LIB_DIR)
 	gcc $(OBJS2) -o $(NAME2) -L $(LIB_DIR) -lftprintf
 
 clean:
-	rm -f $(OBJS1)
-	rm -f $(OBJS2)
-	make -C libft/ fclean
-	make -C ft_printf/ fclean
+	rm -rf $(DIR_O)
+	@make -C libft/ clean
+	@make -C ft_printf/ clean
 
-fclean:
-	rm -f $(OBJS1)
+fclean: clean
 	rm -f $(NAME1)
 	rm -f $(NAME2)
-	make -C libft/ fclean
-	make -C ft_printf/ fclean
+	@make -C libft/ fclean
+	@make -C ft_printf/ fclean
 
 re: fclean all

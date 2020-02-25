@@ -62,7 +62,6 @@ int				main(int argv, char **argc)
 			write(1, "OK\n", 3);
 		else
 			write(1, "KO\n", 3);
-		//display_stack(s);
 		free_stacks(s);
 		free_operations(operations, i);
 	}

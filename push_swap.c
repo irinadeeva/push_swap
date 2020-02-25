@@ -21,10 +21,12 @@ void	free_stack(t_stacks *s)
 	tmp2 = tmp->next;
 	while (s->len_a--)
 	{
-		free(tmp);
 		free(tmp->cost);
-		tmp = tmp2;
-		tmp2 = tmp2->next;
+        free(tmp);
+        tmp = tmp2;
+        if (tmp2 != s->top_a)
+		    tmp2 = tmp2->next;
+
 	}
 	free(s->stat);
 	free(s);
