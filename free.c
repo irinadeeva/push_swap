@@ -34,10 +34,10 @@ void			free_a(t_stack *a, t_stack *top_a)
 	tmp2 = tmp->next;
 	while (i--)
 	{
+        free(tmp->cost);
 		free(tmp);
-		free(tmp->cost);
 		tmp = tmp2;
-		(tmp2 != NULL) ? tmp2 = tmp->next : 0;
+		(tmp2 != top_a) ? tmp2 = tmp->next : 0;
 	}
 }
 

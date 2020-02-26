@@ -14,8 +14,6 @@
 # define FT_PUSH_SWAP_H
 
 # include "ft_printf/ft_print.h"
-# include <stdio.h>
-# include <stdlib.h>
 
 /*
 ** direction_a, direction_b

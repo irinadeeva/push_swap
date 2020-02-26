@@ -60,7 +60,6 @@ $(LIB):
 	@make -C ft_printf/
 
 $(NAME1): $(OBJS1)
-	gcc -c $(FLAGS) $(SRCS1) -I $(H_DIR1) -I $(LIB_DIR)
 	gcc $(OBJS1) -o $(NAME1) -L $(LIB_DIR) -lftprintf
 
 $(DIR_O)%.o: $(DIR_S)%.c
@@ -68,7 +67,6 @@ $(DIR_O)%.o: $(DIR_S)%.c
 	$(CC) $(FLAGS) -o $@ -c $<
 
 $(NAME2): $(OBJS2)
-	gcc -c $(FLAGS) $(SRCS2) -I $(H_DIR2) -I $(LIB_DIR)
 	gcc $(OBJS2) -o $(NAME2) -L $(LIB_DIR) -lftprintf
 
 clean:
